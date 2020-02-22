@@ -1,0 +1,150 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="icon-note"></i> Form Validation
+          <a class="badge badge-danger" href="https://coreui.io/pro/">CoreUI Pro Component</a>
+          <div class="card-header-actions">
+            <a class="card-header-action" href="https://angular.io/guide/form-validation" target="_blank">
+              <small class="text-muted">docs</small>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">Angular Form Validation
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Simple Form</h6>
+              <form [formGroup]="simpleForm" novalidate (ngSubmit)="onSubmit()" class="needs-validation">
+                <div class="form-group">
+                  <label class="col-form-label" for="firstName">First name</label>
+                  <input class="form-control"
+                         id="firstName"
+                         type="text"
+                         formControlName="firstName"
+                         placeholder="First name"
+                         autocomplete="given-name"
+                         required
+                         autofocus
+                         [ngClass]="{ 'is-invalid': submitted && f.firstName.errors, 'is-valid': f.firstName.touched && !f.firstName.errors }" />
+                  <div *ngIf="submitted && f['firstName'].errors" class="invalid-feedback">
+                    <div *ngIf="f['firstName'].errors.required">First Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="lastName">Last name</label>
+                  <input class="form-control"
+                         id="lastName"
+                         type="text"
+                         formControlName="lastName"
+                         placeholder="Last name"
+                         autocomplete="family-name"
+                         required
+                         [ngClass]="{ 'is-invalid': submitted && f.lastName.errors, 'is-valid': f.lastName.touched && !f.lastName.errors }" />
+                  <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+                    <div *ngIf="f['lastName'].errors.required">Last Name is required</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="username">Username</label>
+                  <input class="form-control"
+                         id="username"
+                         type="text"
+                         formControlName="username"
+                         placeholder="Username"
+                         autocomplete="username"
+                         required
+                         [ngClass]="{ 'is-invalid': submitted && f.username.errors, 'is-valid': f.username.touched && !f.username.errors }" />
+                  <div *ngIf="submitted && simpleForm.controls['username'].errors" class="invalid-feedback">
+                    <div *ngIf="f['username'].errors.required">Username is required</div>
+                    <div *ngIf="f['username'].errors.minlength">{{formErrors.username.minLength}}</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-form-label" for="email">Email</label>
+                  <input class="form-control"
+                         id="email"
+                         type="text"
+                         formControlName="email"
+                         placeholder="Email"
+                         autocomplete="email"
+                         required
+                         [ngClass]="{ 'is-invalid': submitted && f.email.errors, 'is-valid': f.email.touched && !f.email.errors }" />
+                  <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                    <div *ngIf="f['email'].errors.required">Email is required</div>
+                    <div *ngIf="f['email'].errors.email">{{formErrors.email.email}}</div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-6">
+                    <label class="col-form-label" for="password">Password</label>
+                    <input class="form-control"
+                           id="password"
+                           type="password"
+                           formControlName="password"
+                           placeholder="Password"
+                           autocomplete="new-password"
+                           required
+                           [ngClass]="{ 'is-invalid': submitted && f.password.errors, 'is-valid': f.password.touched && !f.password.errors }" />
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors.required">Password is required</div>
+                      <div *ngIf="f['password'].errors.minlength">{{formErrors.password.minLength}}</div>
+                      <div *ngIf="f['password'].errors.pattern">{{formErrors.password.pattern}}</div>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label class="col-form-label" for="confirmPassword">Confirm password</label>
+                    <input class="form-control"
+                           id="confirmPassword"
+                           type="password"
+                           formControlName="confirmPassword"
+                           placeholder="Confirm password"
+                           autocomplete="new-password"
+                           required
+                           [ngClass]="{ 'is-invalid': submitted && simpleForm.errors, 'is-valid': f.confirmPassword.touched && !simpleForm.errors }" />
+                    <div *ngIf="submitted && simpleForm.errors" class="invalid-feedback">
+                      <div *ngIf="simpleForm.errors['passwordMismatch']">{{formErrors.confirmPassword.passwordMismatch}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox"
+                           class="custom-control-input"
+                           id="accept"
+                           formControlName="accept"
+                           required
+                           [ngClass]="{ 'is-invalid': submitted && f.accept.errors, 'is-valid': !f.accept.errors }" />
+                    <label class="custom-control-label" for="accept">I accept the terms of use</label>
+                    <div *ngIf="submitted && f['accept'].errors" class="invalid-feedback">
+                      <div *ngIf="f['accept'].errors.required">You have to accept our Terms and Conditions</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button class="btn btn-primary mr-1" type="submit" [disabled]="simpleForm.pristine || simpleForm.invalid">Submit</button>
+                  <button class="btn btn-success mr-1" type="submit" [disabled]="simpleForm.valid">Validate</button>
+                  <button class="btn btn-danger" type="reset" [disabled]="simpleForm.pristine && !submitted" (click)="onReset()">Reset</button>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-6">
+              <div class="card bg-secondary" [ngClass]="{ 'bg-info' : simpleForm.valid }">
+                <div class="card-body">
+                  <pre>Value: <code>{{ simpleForm.value | json }}</code></pre>
+                  <p>
+                    Status: {{ simpleForm.status }}
+                  </p>
+                  <p>
+                    Errors: {{ simpleForm.errors | json }}
+                  </p>
+                </div>
+              </div>
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
