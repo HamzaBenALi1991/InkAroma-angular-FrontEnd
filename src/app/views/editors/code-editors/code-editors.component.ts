@@ -23,7 +23,7 @@ const defaults = {
   templateUrl: 'code-editors.component.html'
 })
 export class CodeEditorsComponent implements AfterViewInit {
-  @ViewChild('editor', {static: false}) editor;
+  @ViewChild('editor') editor;
 
   text: string = defaults.markdown;
   options: any = {
