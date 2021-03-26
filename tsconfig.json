@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "skipLibCheck": true, /// Needs to be true to fix wrong alias types being used
     "module": "esnext",
     "target": "es5",
     "typeRoots": [

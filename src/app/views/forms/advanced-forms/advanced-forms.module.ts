@@ -6,10 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
 // Timepicker
-import { TimepickerModule } from 'ngx-bootstrap';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 // Datepicker
-import { BsDatepickerModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 // Ng2-select
 import { SelectModule } from 'ng-select';
