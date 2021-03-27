@@ -15,7 +15,7 @@ Build:
     - master
   stage: build
   script:
-    - npm ci
+    - npm install
     - npm run-script build
   artifacts:
     expire_in: 1 day
