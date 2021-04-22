@@ -15,3 +15,6 @@
 // Spinkit
 $spinkit-spinner-color: $body-color;
 @import '~spinkit/scss/spinkit.scss';
+
+// Toastr Styles
+@import './vendors/toastr/toastr.scss';

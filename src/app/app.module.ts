@@ -28,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { ChartsModule } from 'ng2-charts';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    ToasterModule
   ],
   declarations: [
     AppComponent,
@@ -55,7 +57,9 @@ import { ChartsModule } from 'ng2-charts';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  },
+  ToasterService
+],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

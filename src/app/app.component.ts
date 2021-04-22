@@ -1,13 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { ToasterConfig, ToasterService } from 'angular2-toaster';
 
 @Component({
-  // tslint:disable-next-line
   selector: 'body',
-  template: '<router-outlet></router-outlet>'
+  styleUrls: ['../scss/vendors/toastr/toastr.scss'],
+  templateUrl: './app.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+
+  
+  public toasterconfig: ToasterConfig =
+    new ToasterConfig({
+      tapToDismiss: true,
+      timeout: 5000
+    });
+    
+  constructor(private router: Router, private toasterService: ToasterService) { }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {
