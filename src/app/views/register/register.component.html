@@ -5,45 +5,169 @@
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4">
-              <form>
+              <form [formGroup]="SignUpForm" >
                 <h1>Register</h1>
                 <p class="text-muted">Create your account</p>
-                <div class="input-group mb-3">
+                <!-- pseudo input -->
+                <div class="input-group mb-3 form-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-user"></i></span>
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="pseudo"
+                    autocomplete="pseudo"
+                    formControlName="psoeudo"
+                  />
                 </div>
-                <div class="input-group mb-3">
+                <!--email input -->
+                <div class="input-group mb-3 form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Email" autocomplete="email" required>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Email"
+                    autocomplete="email"
+                    formControlName="email"
+                  />
                 </div>
-                <div class="input-group mb-3">
+                <!--password input -->
+
+                <div class="input-group mb-3 form-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password" autocomplete="new-password" required>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    formControlName="password"
+                  />
                 </div>
-                <div class="input-group mb-4">
+                <!-- password confirmation  input -->
+
+                <div class="input-group mb-4 form-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" required>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Repeat password"
+                    autocomplete="new-password"
+                  />
                 </div>
-                <button type="button" class="btn btn-block btn-success">Create Account</button>
+                <!-- Firstname -->
+                <div class="input-group mb-3 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Firstname "
+                    autocomplete="firstname"
+                    formControlName="firstname"
+                  />
+                </div>
+                <!-- lastname input -->
+                <div class="input-group mb-3 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Lastname"
+                    autocomplete="lastname"
+                    formControlName="lastname"
+                  />
+                </div>
+                <!-- country  input -->
+                <div class="input-group mb-3 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-map"></i>
+                    </span>
+                  </div>
+                  <!-- <input
+                    type="country"
+                    class="form-control"
+                    placeholder="Country"
+                    autocomplete="country"
+                  /> -->
+                  <select formControlName="country" class="form-control" name="country" id="country">
+                    <option value="" disabled selected>Select Country</option>
+                    <option
+                      *ngFor="let country of countries"
+                      [value]="country.name"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
+                </div>
+                <!-- Phone number  input -->
+                <div class="input-group mb-3 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-phone"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="Phone"
+                    autocomplete="Phone"
+                    formControlName="phone"
+                  />
+                </div>
+                <!-- age input -->
+                <div class="input-group mb-3 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-calendar"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="Age"
+                    autocomplete="age"
+                    formControlName="age"
+                  />
+                </div>
+                <!-- image input -->
+                <div class="input-group mb-3 form-group"> 
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-calendar"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="file"
+                    formControlName="image"
+                    class="form-control"
+                  />
+                </div>
+
+                <button type="button" class="btn btn-block btn-success">
+                  Create Account
+                </button>
               </form>
-            </div>
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-                </div>
-                <div class="col-6">
-                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
