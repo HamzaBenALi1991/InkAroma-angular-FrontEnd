@@ -1,1 +1,20 @@
 // Here you can add other styles
+// used in registration 
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+  input.ng-valid.ng-touched {
+    border: 1px solid rgba(66, 241, 66, 0.822);
+  }
+  .errormessage {
+    color :red ; 
+  }
+  // this is for email existing 
+  .thisiswrong {
+    color :red ; 
+    display: none ;
+  }
+  .showw{
+      display: inline-block;
+  }
+

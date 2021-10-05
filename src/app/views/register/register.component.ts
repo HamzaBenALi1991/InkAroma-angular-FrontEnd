@@ -17,12 +17,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.SignUpForm = new FormGroup({
-      "psoeudo": new FormControl(null , Validators.required),
+      "pseudo": new FormControl(null , Validators.required),
       "email": new FormControl(null , [Validators.required,Validators.email]),
       "password": new FormControl(null , [Validators.required, Validators.minLength(6)]),
       "password2" : new FormControl(null , [ Validators.required,this.confirmPassword.bind(this)]),
-      "firstname": new FormControl(null),
-      "lastname": new FormControl(null),
+      "firstname": new FormControl(null,Validators.required),
+      "lastname": new FormControl(null,Validators.required),
       "age": new FormControl(null),
       "country": new FormControl(null),
       "phone": new FormControl(null),
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
       
 
     });
-    // for validation password 
+    // for ASYNCvalidation password 
     this.SignUpForm.valueChanges.subscribe( // this is for updating password input to compare it to password 2 on the confirmpassword validator 
       (value: any) => {
         this.pass = value.password;
@@ -41,10 +41,14 @@ export class RegisterComponent implements OnInit {
   }
   onsubmit(){
     console.log(this.SignUpForm);
+
+    this.SignUpForm.reset()
+
   }
   confirmPassword(control: FormControl | any): { [s: string]: Boolean } | null {
     if (this.pass !== control.value) {
       return { 'NoMatch': true };
     } return null
   }
+
 }
