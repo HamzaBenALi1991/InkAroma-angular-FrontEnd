@@ -9,7 +9,7 @@ import { ToasterService } from 'angular2-toaster';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private toasterService: ToasterService  , private router : Router) { }
+  constructor(private toasterService: ToasterService, private router: Router) { }
 
   ngOnInit(): void {
     this.showSuccess();
@@ -18,8 +18,11 @@ export class LoginComponent implements OnInit {
   showSuccess() {
     this.toasterService.pop('Primary', 'Ink-Aroma', 'Welcomes you back .');
   }
-  onclick(){
+  onclick() {
     this.router.navigate(['register'])
-    }
+  }
+  toforget() {
 
- }
+  }
+
+}
