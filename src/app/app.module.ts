@@ -31,6 +31,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ForgetPasswordComponent } from './views/login/forget-password/forget-password.component';
 
 @NgModule({
   imports: [
@@ -47,7 +48,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     TabsModule.forRoot(),
     ChartsModule,
     ToasterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   declarations: [
     AppComponent,
@@ -56,6 +58,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ForgetPasswordComponent
   ],
   providers: [{
     provide: LocationStrategy,
