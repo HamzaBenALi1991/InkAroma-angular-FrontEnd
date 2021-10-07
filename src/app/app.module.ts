@@ -20,6 +20,7 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
+  
 } from '@coreui/angular';
 
 // Import routing module
@@ -33,6 +34,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgetPasswordComponent } from './views/login/forget-password/forget-password.component';
 import { ResetComponent } from './views/login/reset/reset.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -50,6 +52,7 @@ import { ResetComponent } from './views/login/reset/reset.component';
     ChartsModule,
     ToasterModule,
     ReactiveFormsModule,
+    HttpClientModule
     
   ],
   declarations: [
