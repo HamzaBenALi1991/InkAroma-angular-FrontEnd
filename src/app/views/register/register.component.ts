@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
 import { HttpService } from '../../services/http.service';
 import { countries } from '../../shared/component/store/country-data';
 
@@ -9,7 +11,11 @@ import { countries } from '../../shared/component/store/country-data';
 
 })
 export class RegisterComponent implements OnInit {
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService,
+    private toasterService: ToasterService,
+    private element: ElementRef,
+    private path: Renderer2,
+    private router: Router) { }
   public countries: any = countries
   SignUpForm: FormGroup;
   pass: "";
@@ -21,6 +27,7 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+    // reactive form set up 
     this.SignUpForm = new FormGroup({
       "pseudo": new FormControl(null, Validators.required),
       "email": new FormControl(null, [Validators.required, Validators.email]),
@@ -43,36 +50,54 @@ export class RegisterComponent implements OnInit {
     );
 
   }
+  // Onchange handler 
   selectImage(e: any) {
     // caught image file in change 
     if (e.target.files.length > 0) {
       this.imageuploaded = e.target.files[0];
       console.log(this.imageuploaded);
-
-
     }
+  };
 
-  }
+  // form sabmit
   onsubmit() {
     // create the user
-    let user : any 
+    let user: any
     this.http.createUser(this.SignUpForm.value).subscribe(res => {
       console.log(res);
-      user = res 
-      this.formdata.append('file', this.imageuploaded)
-      this.http.uploadImage(this.formdata,user.user._id).subscribe(res => {
-        console.log(res);
-      }, err => {
-        console.log(err);
-        console.log(err.message);
-      })
+      user = res
+      this.SignUpForm.reset()
+      // for notification at top 
+      this.toasterService.pop("succes", "Registration succeeded", "See you at Login !");
+      //redirect to login page 
+      setTimeout(() => {
+        this.router.navigate(['login'])
+      }, 2000);
+      // in case file image upload summon a new http request to handle it 
+      if (this.imageuploaded) {
+        this.formdata.append('file', this.imageuploaded)
+        this.http.uploadImage(this.formdata, user.user._id).subscribe(res => {
+
+        }, err => {
+          console.log(err);
+        })
+      }
+
     }, err => {
-      console.log(err);
+      if (err.error === "Email alreadt exist") {
+        this.toasterService.pop('error', 'Registeration  Failed  ', 'Email alreadt exist');
+        let part = this.element.nativeElement.querySelector('.thisiswrong')
+        this.path.addClass(part, 'show')
+      }else {
+        this.router.navigate(['500'])
+      }
+
     });
 
 
 
-  }
+  };
+  // this is a personalised validators for checking the confirmation password 
   confirmPassword(control: FormControl | any): { [s: string]: Boolean } | null {
     if (this.pass !== control.value) {
       return { 'NoMatch': true };
