@@ -12,7 +12,7 @@ export class HttpService {
   getAllUsers() {
     return this.http.get('http://localhost:3000/users')
   }
-  getOneUser(id: number) {
+  getOneUser(id: any) {
     return this.http.get(`http://localhost:3000/user/${id}`)
   }
   updateUser(id: any, body: any) {
@@ -22,7 +22,7 @@ export class HttpService {
     return this.http.delete(`http://localhost:3000/user/${id}`)
   }
   createUser(body: any) {
-    return this.http.post(`http://localhost:3000/newuser`, body)
+    return this.http.post("http://localhost:3000/newuser", body)
   }
   // login 
   login(body: any) {
@@ -78,6 +78,10 @@ export class HttpService {
     }
     createReview(body: any) {
       return this.http.post(`http://localhost:3000/newreview`, body)
+    }
+    ////////////:: image only upload ///////////////////:
+    uploadImage (formData :FormData, id :any){
+      return this.http.post(`http://localhost:3000/upload/${id}`, formData)
     }
 
 }

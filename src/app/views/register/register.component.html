@@ -17,7 +17,7 @@
                     ></span>
                   </div>
                   <input
-                    style="min-width: 90%"
+                    style="min-width: 70%"
                     type="text"
                     class="form-control"
                     placeholder="pseudo"
@@ -45,7 +45,7 @@
                     class="form-control"
                     placeholder="Email"
                     formControlName="email"
-                    style="min-width: 90%"
+                    style="min-width: 70%"
                   />
                   <!-- email error handlying -->
 
@@ -90,7 +90,7 @@
                     class="form-control"
                     placeholder="Password"
                     formControlName="password"
-                    style="min-width: 90%"
+                    style="min-width: 70%"
                   />
                   <small
                     class="errormessage"
@@ -131,7 +131,7 @@
                     class="form-control"
                     placeholder="Repeat password"
                     formControlName="password2"
-                    style="min-width: 90%"
+                    style="min-width: 70%"
                   />
                   <small
                     class="errormessage"
@@ -171,7 +171,7 @@
                     class="form-control"
                     placeholder="Firstname "
                     formControlName="firstname"
-                    style="min-width: 90%"
+                    style="min-width: 70%"
                   />
                   <small
                     class="errormessage"
@@ -195,7 +195,7 @@
                     class="form-control"
                     placeholder="Lastname"
                     formControlName="lastname"
-                    style="min-width: 90%"
+                    style="min-width: 70%"
                   />
                   <small
                     class="errormessage"
@@ -272,6 +272,7 @@
                     type="file"
                     formControlName="image"
                     class="form-control"
+                    (change)="selectImage($event)"
                   />
                 </div>
 
