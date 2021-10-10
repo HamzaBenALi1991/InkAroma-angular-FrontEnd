@@ -10,13 +10,7 @@ export class AuthServiceService {
   logIn(token: any) {
     localStorage.setItem('token', token)
   }
-  // check if token exist or existed ? 
-  isAuth() {
-    const data = localStorage.getItem('token')
-    if (data != null) {
-      return true
-    } else {
-      return false
-    }
+  logout(){
+    localStorage.clear() 
   }
 }
