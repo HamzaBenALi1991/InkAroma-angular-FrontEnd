@@ -38,7 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthServiceService } from './services/auth-service.service';
 import { YourInterceptor } from './services/token-intercepter.service';
-import { AuthGardGuard } from '../auth-gard.guard';
+import { AuthGuardGuard } from './auth-guard.guard';
 
 @NgModule({
   imports: [
@@ -69,7 +69,7 @@ import { AuthGardGuard } from '../auth-gard.guard';
     ForgetPasswordComponent,
     ResetComponent
   ],
-  providers: [AuthGardGuard, AuthServiceService, YourInterceptor, {
+  providers: [AuthGuardGuard, AuthServiceService, YourInterceptor, {
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
 
