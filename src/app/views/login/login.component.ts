@@ -2,6 +2,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
+import { AuthServiceService } from '../../services/auth-service.service';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -10,15 +11,15 @@ import { HttpService } from '../../services/http.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private toasterService: ToasterService, private http: HttpService) { }
+  constructor(private toasterService: ToasterService, private http: HttpService, private authService: AuthServiceService) { }
   users: any
-  token :any
+  token: any
   loginForm: FormGroup
   status = false
   isloading = false
   ngOnInit(): void {
     this.showSuccess();
- 
+
 
     this.loginForm = new FormGroup({
       "email": new FormControl(null, [Validators.email, Validators.required]),
@@ -39,15 +40,16 @@ export class LoginComponent implements OnInit {
   showSuccess() {
     this.toasterService.pop('Primary', 'Ink-Aroma', 'Welcomes you back .');
   }
-  onclick() {
-  }
+
   OnSubmit() {
     this.isloading = true
     this.http.login(this.loginForm.value).subscribe(res => {
       console.log(res);
-      this.token =res 
+      this.token = res
       this.token = this.token.token
-      
+      this.authService.logIn(this.token)
+
+
       this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
       this.isloading = false
 

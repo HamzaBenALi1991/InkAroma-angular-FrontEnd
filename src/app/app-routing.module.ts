@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardGuard } from './auth-guard.guard';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
@@ -15,7 +16,7 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full',
+    pathMatch: 'full',  
   },
   {
     path: '404',
@@ -60,7 +61,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: '',
+    path: '', canActivate : [AuthGuardGuard],
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'

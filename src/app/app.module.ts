@@ -22,7 +22,7 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
-  
+
 } from '@coreui/angular';
 
 // Import routing module
@@ -36,6 +36,9 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { AuthServiceService } from './services/auth-service.service';
+import { YourInterceptor } from './services/token-intercepter.service';
+import { AuthGardGuard } from '../auth-gard.guard';
 
 @NgModule({
   imports: [
@@ -54,7 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
     ToasterModule,
     ReactiveFormsModule,
     HttpClientModule
-    
+
   ],
   declarations: [
     AppComponent,
@@ -66,12 +69,13 @@ import { HttpClientModule } from '@angular/common/http';
     ForgetPasswordComponent,
     ResetComponent
   ],
-  providers: [{
+  providers: [AuthGardGuard, AuthServiceService, YourInterceptor, {
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
+    useClass: HashLocationStrategy,
+
   },
-  ToasterService
-],
-  bootstrap: [ AppComponent ]
+    ToasterService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

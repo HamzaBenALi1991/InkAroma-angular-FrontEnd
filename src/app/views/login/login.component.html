@@ -4,7 +4,7 @@
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-8 mx-auto" > 
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
@@ -98,7 +98,8 @@
                       </button>
                     </div>
                   </div>
-                </form>
+                </form> 
+                <!-- loading spinner -->
                 <div
                   class="lds-hourglass"
                   *ngIf="this.isloading"
@@ -122,7 +123,7 @@
                     asbestos. <q> Author: Scott Douglas</q>
                   </p>
                   <button
-                    (click)="onclick()"
+                  [routerLink]="['/register']" routerLinkActive="router-link-active" 
                     type="button"
                     class="btn btn-primary active mt-3"
                   >
