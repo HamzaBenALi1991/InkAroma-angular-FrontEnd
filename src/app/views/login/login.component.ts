@@ -1,5 +1,4 @@
 
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
@@ -15,6 +14,7 @@ export class LoginComponent implements OnInit {
   users: any
   loginForm: FormGroup
   status = false
+  isloading = false
   ngOnInit(): void {
     this.showSuccess();
 
@@ -40,15 +40,22 @@ export class LoginComponent implements OnInit {
   onclick() {
   }
   OnSubmit() {
+    this.isloading = true
     this.http.login(this.loginForm.value).subscribe(res => {
       console.log(res);
       this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
+      this.isloading = false
+
     }, err => {
       console.log(err);
+
       if (err.error.message === 'Please make sure the email and password are correct .') {
+        this.isloading = false
         this.toasterService.pop("warning", "login failed", "'Please make sure the email and password are correct .'");
-        
+
       } else {
+        this.isloading = false
+
         console.log(err.error);
 
       }
