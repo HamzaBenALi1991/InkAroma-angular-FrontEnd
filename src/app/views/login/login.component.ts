@@ -12,11 +12,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private toasterService: ToasterService, private http: HttpService) { }
   users: any
+  token :any
   loginForm: FormGroup
   status = false
   isloading = false
   ngOnInit(): void {
     this.showSuccess();
+ 
 
     this.loginForm = new FormGroup({
       "email": new FormControl(null, [Validators.email, Validators.required]),
@@ -43,6 +45,9 @@ export class LoginComponent implements OnInit {
     this.isloading = true
     this.http.login(this.loginForm.value).subscribe(res => {
       console.log(res);
+      this.token =res 
+      this.token = this.token.token
+      
       this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
       this.isloading = false
 

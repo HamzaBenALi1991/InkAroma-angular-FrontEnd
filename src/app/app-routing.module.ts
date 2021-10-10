@@ -8,6 +8,7 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { ForgetPasswordComponent } from './views/login/forget-password/forget-password.component';
 import { LoginComponent } from './views/login/login.component';
+import { ResetComponent } from './views/login/reset/reset.component';
 import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
@@ -35,6 +36,20 @@ export const routes: Routes = [
     component: LoginComponent,
     data: {
       title: 'Login Page'
+    }
+  },
+  {
+    path: 'login/forget',
+    component: ForgetPasswordComponent,
+    data: {
+      title: 'ForgetPassword Page'
+    }
+  },
+  {
+    path: 'login/resetpassword',
+    component: ResetComponent,
+    data: {
+      title: 'resetPassword Page'
     }
   },
   {
@@ -113,7 +128,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }) ],
-  exports: [ RouterModule ]
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

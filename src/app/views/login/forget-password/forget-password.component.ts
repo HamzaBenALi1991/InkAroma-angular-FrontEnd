@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpService } from '../../../services/http.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
-
-  constructor() { }
+  findaccount: FormGroup
+  constructor(private http: HttpService) { }
 
   ngOnInit(): void {
+    this.findaccount = new FormGroup({
+      "email": new FormControl(null, Validators.required)
+    })
   }
+  OnSubmit() {
+    console.log(this.findaccount.value);
+    this.http.finduseraccount(this.findaccount.value).subscribe(res => {
+      console.log(res);
 
+    }, err => {
+      console.log(err);
+
+    })
+  }
 }
