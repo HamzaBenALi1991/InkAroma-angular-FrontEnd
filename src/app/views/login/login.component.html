@@ -1,4 +1,4 @@
- <div class="app-body">
+<div class="app-body">
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
@@ -6,38 +6,117 @@
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
-                <form>
+                <form [formGroup]="loginForm" (ngSubmit)="OnSubmit()">
                   <h1>Login</h1>
                   <p class="text-muted">Sign In to your account</p>
+                  <!-- login input -->
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-user"></i></span>
+                      <span class="input-group-text"
+                        ><i class="icon-user"></i
+                      ></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="email"
+                      autocomplete="email"
+                      formControlName="email"
+                      style="min-width: 80%"
+                    />
+                    <!-- error email handlying -->
+                    <small
+                      class="errormessage"
+                      *ngIf="
+                        !this.loginForm.get('email').valid &&
+                        this.loginForm.get('email').touched
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          this.loginForm.get('email').errors['required'] &&
+                          this.loginForm.get('email').touched
+                        "
+                      >
+                        This feild is required .
+                      </span>
+                      <span
+                        *ngIf="
+                          this.loginForm.get('email').errors['email'] &&
+                          this.loginForm.get('email').touched
+                        "
+                      >
+                        This Email adresse format is incorrect .
+                      </span>
+                    </small>
                   </div>
+
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                      <span class="input-group-text"
+                        ><i class="icon-lock"></i
+                      ></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      autocomplete="current-password"
+                      formControlName="password"
+                      style="min-width: 80%"
+                    />
+                    <small
+                      class="errormessage"
+                      *ngIf="
+                        !this.loginForm.get('password').valid &&
+                        this.loginForm.get('password').touched
+                      "
+                    >
+                    This feild is required . 
+                    </small>
                   </div>
+
                   <div class="row">
                     <div class="col-6">
-                      <button type="button" class="btn btn-primary px-4">Login</button>
+                      <button
+                        [disabled]="!this.loginForm.valid"
+                        type="submit"
+                        class="btn btn-primary px-4"
+                      >
+                        Login
+                      </button>
                     </div>
                     <div class="col-6 text-right">
-                      <button  type="button" class="btn btn-link px-0">Forgot password?</button>
+                      <button  type="button" class="btn btn-link px-0">
+                        Forgot password?
+                      </button>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
+            <div
+              class="card text-white bg-primary py-5 d-md-down-none"
+              style="width: 44%"
+            >
               <div class="card-body text-center">
                 <div>
-                  <h2>Ink-Aroma</h2>
-                  <p> There was the smell of old books, a smell that has a way of making all libraries seem the same. Some say that smell is asbestos. <q> Author: Scott Douglas</q></p>
-                  <button  (click)="onclick()" type="button" class="btn btn-primary active mt-3">Register Now!</button>
+                  <img
+                    src="https://see.fontimg.com/api/renderfont4/dJnR/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SW5rLUFyb21h/merry-christmas-star.png"
+                    alt=""
+                  />
+                  <p>
+                    There was the smell of old books, a smell that has a way of
+                    making all libraries seem the same. Some say that smell is
+                    asbestos. <q> Author: Scott Douglas</q>
+                  </p>
+                  <button
+                    (click)="onclick()"
+                    type="button"
+                    class="btn btn-primary active mt-3"
+                  >
+                    Register Now!
+                  </button>
                 </div>
               </div>
             </div>
@@ -46,5 +125,4 @@
       </div>
     </div>
   </main>
-</div> 
-
+</div>
