@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
 import { AuthServiceService } from '../../services/auth-service.service';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   status = false
   isloading = false
   ngOnInit(): void {
-    this.showSuccess();
+    this.showNotifications();
 
 
     this.loginForm = new FormGroup({
@@ -33,33 +33,32 @@ export class LoginComponent implements OnInit {
     );
 
   }
-
-  showSuccess() {
+  // toester 
+  showNotifications() {
     this.toasterService.pop('Primary', 'Ink-Aroma', 'Welcomes you back .');
   }
 
   OnSubmit() {
+    // spiner loaded 
     this.isloading = true
+    // http request infos
     this.http.login(this.loginForm.value).subscribe(res => {
       console.log(res);
       this.token = res
       this.token = this.token.token
       this.authService.logIn(this.token)
-
-
+      //notifications 
       this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
       this.isloading = false
-
     }, err => {
-      console.log(err);
-
       if (err.error.message === 'Please make sure the email and password are correct .') {
         this.isloading = false
         this.toasterService.pop("warning", "login failed", "'Please make sure the email and password are correct .'");
 
       } else {
+        // spinner stopped 
         this.isloading = false
-
+        this.toasterService.pop("warning", "login failed", "Internal Serveur Problem .");
         console.log(err.error);
 
       }

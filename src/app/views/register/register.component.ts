@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   pass: "";
   status = false;
   imageuploaded: any
-
+  isloading = false
   formdata = new FormData();
 
 
@@ -61,6 +61,8 @@ export class RegisterComponent implements OnInit {
 
   // form sabmit
   onsubmit() {
+    //spiner 
+    this.isloading = true
     // create the user
     let user: any
     this.http.createUser(this.SignUpForm.value).subscribe(res => {
@@ -72,14 +74,15 @@ export class RegisterComponent implements OnInit {
       //redirect to login page 
       setTimeout(() => {
         this.router.navigate(['login'])
-      }, 2000);
+      }, 3000);
       // in case file image upload summon a new http request to handle it 
       if (this.imageuploaded) {
         this.formdata.append('file', this.imageuploaded)
         this.http.uploadImage(this.formdata, user.user._id).subscribe(res => {
 
         }, err => {
-          console.log(err);
+          this.toasterService.pop("error", "Registration Failer ", err.error.message);
+
         })
       }
 
@@ -88,7 +91,7 @@ export class RegisterComponent implements OnInit {
         this.toasterService.pop('error', 'Registeration  Failed  ', 'Email alreadt exist');
         let part = this.element.nativeElement.querySelector('.thisiswrong')
         this.path.addClass(part, 'show')
-      }else {
+      } else {
         this.router.navigate(['500'])
       }
 

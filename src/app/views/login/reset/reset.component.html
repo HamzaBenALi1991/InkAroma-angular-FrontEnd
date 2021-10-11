@@ -6,14 +6,24 @@
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
-                <form [formGroup]="resetPassword" (ngSubmit)="OnSubmit()">
+                <div
+                  class="lds-hourglass"
+                  style="margin-left: 45%"
+                  *ngIf="this.isloading"
+                ></div>
+                <form
+                  *ngIf="!this.isloading"
+                  [formGroup]="resetPassword"
+                  (ngSubmit)="OnSubmit()"
+                >
                   <h1>Reset Password</h1>
-                  <p class="text-muted">Please enter your new Password  .</p>
+                  <p class="text-muted">Please enter your new Password .</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
-                        <span class="input-group-icon"><i class="icon-lock"></i
-                          ></span>
+                        <span class="input-group-icon"
+                          ><i class="icon-lock"></i
+                        ></span>
                       </span>
                     </div>
                     <input
@@ -27,13 +37,22 @@
 
                   <div class="row">
                     <div class="col-6">
-                      <button  type="submit" class="btn btn-primary px-4">
+                      <button
+                        type="submit"
+                        class="btn btn-primary px-4"
+                        [disabled]="!this.resetPassword.valid"
+                      >
                         Reset password
                       </button>
                     </div>
                     <div class="col-6 text-right">
-                      <button [routerLink]="['/login']" routerLinkActive="router-link-active"  type="button" class="btn btn-link px-0">
-                       Go back to login page ?
+                      <button
+                        [routerLink]="['/login']"
+                        routerLinkActive="router-link-active"
+                        type="button"
+                        class="btn btn-link px-0"
+                      >
+                        Go back to login page ?
                       </button>
                     </div>
                   </div>
