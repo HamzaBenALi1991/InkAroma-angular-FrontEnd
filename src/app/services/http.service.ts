@@ -36,6 +36,14 @@ export class HttpService {
   removeFavBook(idBook: any, Iduser: any) {
     return this.http.put(`http://localhost:3000/desaffect-book/${idBook}`, Iduser)
   }
+// find account and sendd reset link 
+  forget(data :any){
+    return this.http.put(`http://localhost:3000/forgetEmail`, data) ; 
+  }
+  // change password 
+  Resetpassword ( data :any ){
+    return this.http.put(`http://localhost:3000/resetpassword`,data )
+  }
   ///////////////////////////////////////////////////////////////////////////
   ////////////////////////////////// BookService ////////////////////////////
   getAllBooks() {
@@ -83,10 +91,7 @@ export class HttpService {
     uploadImage (formData :FormData, id :any){
       return this.http.post(`http://localhost:3000/upload/${id}`, formData)
     }
-
-    finduseraccount(body:any ){
-      return this.http.post("http://localhost:3000/findaccount",body)
-    }
+ 
 
 }
 

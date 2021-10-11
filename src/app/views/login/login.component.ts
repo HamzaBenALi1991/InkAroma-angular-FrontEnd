@@ -26,12 +26,9 @@ export class LoginComponent implements OnInit {
       "password": new FormControl(null, Validators.required)
 
     });
-    this.loginForm.valueChanges.subscribe( // this is for updating password input to compare it to password 2 on the confirmpassword validator 
+    this.loginForm.valueChanges.subscribe( // this is for updating form in real time  via subscription 
       (value: any) => {
-
         this.status = this.loginForm.status === 'VALID' ? true : false // this is for updating disablied button 
-        console.log(this.status);
-
       }
     );
 

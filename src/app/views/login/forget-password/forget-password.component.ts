@@ -17,8 +17,7 @@ export class ForgetPasswordComponent implements OnInit {
     })
   }
   OnSubmit() {
-    console.log(this.findaccount.value);
-    this.http.finduseraccount(this.findaccount.value).subscribe(res => {
+    this.http.forget(this.findaccount.value).subscribe(res => {
       console.log(res);
 
     }, err => {

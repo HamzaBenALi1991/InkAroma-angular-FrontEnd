@@ -54,6 +54,13 @@ export const routes: Routes = [
     }
   },
   {
+    path: 'login/resetpassword/:resetLink',
+    component: ResetComponent,
+    data: {
+      title: 'resetPassword Page'
+    }
+  },
+  {
     path: 'register',
     component: RegisterComponent,
     data: {
