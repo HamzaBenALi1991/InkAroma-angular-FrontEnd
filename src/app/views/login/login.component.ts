@@ -4,6 +4,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToasterService } from 'angular2-toaster';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { HttpService } from '../../services/http.service';
+import { quotes } from '../../shared/component/store/quotes-data';
+import { Quotes } from '../../shared/quotes.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,9 +19,18 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   status = false
   isloading = false
+  quoetes : Quotes[] =quotes
+  quote:any = " There was the smell of old books, a smell that has a way of making all libraries seem the same. Some say that smell is asbestos." 
   ngOnInit(): void {
     this.showNotifications();
+    // quotes generator 
+    setInterval(() => {
+      
+      this.quote = this.quoetes[(Math.random() * this.quoetes.length) | 0]
+      this.quote = this.quote.quotes
 
+    }, 5000);
+    
 
     this.loginForm = new FormGroup({
       "email": new FormControl(null, [Validators.email, Validators.required]),

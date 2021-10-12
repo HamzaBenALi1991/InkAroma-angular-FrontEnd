@@ -8,6 +8,7 @@
           <div class="card-group">
             <div class="card p-4">
               <div class="card-body">
+                
                 <form
                   [formGroup]="loginForm"
                   (ngSubmit)="OnSubmit()"
@@ -117,10 +118,8 @@
                     src="https://see.fontimg.com/api/renderfont4/dJnR/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SW5rLUFyb21h/merry-christmas-star.png"
                     alt=""
                   />
-                  <p>
-                    There was the smell of old books, a smell that has a way of
-                    making all libraries seem the same. Some say that smell is
-                    asbestos. <q> Author: Scott Douglas</q>
+                  <p style="min-height: 100px;">
+                  {{quote}}
                   </p>
                   <button
                   [routerLink]="['/register']" routerLinkActive="router-link-active" 
