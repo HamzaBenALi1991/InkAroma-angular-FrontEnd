@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { HttpService } from './http.service';
 
 @Injectable({
@@ -6,13 +7,18 @@ import { HttpService } from './http.service';
 })
 export class AuthServiceService {
 
-  constructor(private http :HttpService) { }
-// login and sending token to localstorage 
-  logIn(token: any) {
-    localStorage.setItem('token', token)
+  constructor(private http: HttpService) { }
+
+  // login and sending token to localstorage 
+  logIn(token: any,Id :any)  {
+    localStorage.setItem('token', token);
+    localStorage.setItem('_Id', Id);
+
+
   }
-  logout(){
-    localStorage.clear() 
+  logout() {
+    localStorage.clear()
   }
- 
+
+
 }

@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { AuthServiceService } from '../../services/auth-service.service';
 import { HttpService } from '../../services/http.service';
@@ -13,24 +14,28 @@ import { Quotes } from '../../shared/quotes.model';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private toasterService: ToasterService, private http: HttpService, private authService: AuthServiceService) { }
+  constructor(private toasterService: ToasterService,
+    private http: HttpService,
+    private authService: AuthServiceService,
+    private router: Router) { }
+  Id : any 
   users: any
   token: any
   loginForm: FormGroup
   status = false
   isloading = false
-  quoetes : Quotes[] =quotes
-  quote:any = " There was the smell of old books, a smell that has a way of making all libraries seem the same. Some say that smell is asbestos." 
+  quoetes: Quotes[] = quotes
+  quote: any = " There was the smell of old books, a smell that has a way of making all libraries seem the same. Some say that smell is asbestos."
   ngOnInit(): void {
     this.showNotifications();
     // quotes generator 
     setInterval(() => {
-      
+
       this.quote = this.quoetes[(Math.random() * this.quoetes.length) | 0]
       this.quote = this.quote.quotes
 
     }, 5000);
-    
+
 
     this.loginForm = new FormGroup({
       "email": new FormControl(null, [Validators.email, Validators.required]),
@@ -54,13 +59,15 @@ export class LoginComponent implements OnInit {
     this.isloading = true
     // http request infos
     this.http.login(this.loginForm.value).subscribe(res => {
-      console.log(res);
       this.token = res
+      this.Id=res
+      this.Id=this.Id._Id
       this.token = this.token.token
-      this.authService.logIn(this.token)
+      this.authService.logIn(this.token , this.Id) ,
       //notifications 
       this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
       this.isloading = false
+      this.router.navigate(["dashboard"])
     }, err => {
       if (err.error.message === 'Please make sure the email and password are correct .') {
         this.isloading = false

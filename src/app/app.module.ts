@@ -35,10 +35,11 @@ import { ChartsModule } from 'ng2-charts';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthServiceService } from './services/auth-service.service';
 import { YourInterceptor } from './services/token-intercepter.service';
 import { AuthGuardGuard } from './auth-guard.guard';
+import { HttpService } from './services/http.service';
 
 @NgModule({
   imports: [
@@ -69,7 +70,11 @@ import { AuthGuardGuard } from './auth-guard.guard';
     ForgetPasswordComponent,
     ResetComponent
   ],
-  providers: [AuthGuardGuard, AuthServiceService, YourInterceptor, {
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: YourInterceptor,
+    multi: true
+  }, {
     provide: LocationStrategy,
     useClass: HashLocationStrategy,
 
