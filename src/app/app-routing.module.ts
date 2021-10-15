@@ -131,6 +131,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       },
       { path: 'profile', loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule) },
+      { path: 'edit', loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule) },
     ]
   },
   { path: '**', component: P404Component }

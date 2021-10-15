@@ -7,7 +7,7 @@ import { ProfileComponent } from './profile.component';
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     CommonModule,

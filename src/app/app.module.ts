@@ -36,10 +36,7 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthServiceService } from './services/auth-service.service';
 import { YourInterceptor } from './services/token-intercepter.service';
-import { AuthGuardGuard } from './auth-guard.guard';
-import { HttpService } from './services/http.service';
 
 @NgModule({
   imports: [

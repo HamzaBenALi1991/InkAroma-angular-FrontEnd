@@ -87,9 +87,17 @@ export class HttpService {
     createReview(body: any) {
       return this.http.post(`http://localhost:3000/newreview`, body)
     }
-    ////////////:: image only upload ///////////////////:
+    ////////////:: image only upload to backEnd ///////////////////:
     uploadImage (formData :FormData, id :any){
       return this.http.post(`http://localhost:3000/upload/${id}`, formData)
+    }
+    //////////// upload imag FROM backEND 
+    getImage (data : any ){
+      return this.http.get(`http://localhost:3000/sentImage`,data)
+    }
+    ///try 
+    try (data : any ){
+      return this.http.get(`http://localhost:3000/image`,data)
     }
  
 

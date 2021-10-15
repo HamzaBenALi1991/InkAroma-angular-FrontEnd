@@ -3,10 +3,10 @@ export class UsertypeModule {
     firstname: String;
     lastname: String;
     email: String;
-    age: Number;
+    age: String;
     password: String;
     country: String;
-    phone: Number;
+    phone: any;
     image: String;
     favoritbooks: [Number];
     reviews: [Number];
@@ -15,13 +15,13 @@ export class UsertypeModule {
     constructor(
         pseudo: String,
         email: String,
-        age: Number,
+        age: String,
         password: String,
         firstname: String,
         lastname: String,
         country: String,
         image: String,
-        phone: Number
+        phone: any
     ) {
         this.pseudo = pseudo;
         this.email = email;

@@ -32,8 +32,8 @@ input.ng-invalid.ng-touched {
     height: 0;
     margin: 8px;
     box-sizing: border-box;
-    border: 32px solid #cef;
-    border-color: #cef transparent #cef transparent;
+    border: 32px solid rgb(17, 167, 241);
+    border-color: rgb(75, 184, 238) transparent #cef transparent;
     animation: lds-hourglass 1.2s infinite;
   }
   @keyframes lds-hourglass {
