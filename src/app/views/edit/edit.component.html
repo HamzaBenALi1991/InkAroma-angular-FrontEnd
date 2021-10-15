@@ -70,14 +70,14 @@
                     formControlName="pseudo"
                   />
                   <small
-                  class="errormessage"
-                  *ngIf="
-                    !this.editForm.get('pseudo').valid &&
-                    this.editForm.get('pseudo').touched
-                  "
-                >
-                  This feild is required.
-                </small>
+                    class="errormessage"
+                    *ngIf="
+                      !this.editForm.get('pseudo').valid &&
+                      this.editForm.get('pseudo').touched
+                    "
+                  >
+                    This feild is required.
+                  </small>
                 </div>
               </div>
               <!-- firstname input -->
@@ -94,14 +94,14 @@
                     formControlName="firstname"
                   />
                   <small
-                  class="errormessage"
-                  *ngIf="
-                    !this.editForm.get('firstname').valid &&
-                    this.editForm.get('firstname').touched
-                  "
-                >
-                  This feild is required.
-                </small>
+                    class="errormessage"
+                    *ngIf="
+                      !this.editForm.get('firstname').valid &&
+                      this.editForm.get('firstname').touched
+                    "
+                  >
+                    This feild is required.
+                  </small>
                 </div>
               </div>
               <!-- lastname input -->
@@ -118,14 +118,14 @@
                     formControlName="lastname"
                   />
                   <small
-                  class="errormessage"
-                  *ngIf="
-                    !this.editForm.get('lastname').valid &&
-                    this.editForm.get('lastname').touched
-                  "
-                >
-                  This feild is required.
-                </small>
+                    class="errormessage"
+                    *ngIf="
+                      !this.editForm.get('lastname').valid &&
+                      this.editForm.get('lastname').touched
+                    "
+                  >
+                    This feild is required.
+                  </small>
                 </div>
               </div>
               <!-- email  input -->
@@ -204,46 +204,124 @@
                   <input
                     type="button"
                     class="btn btn-danger px-4"
-                    value="Cancel changes"
+                    value="Cancel"
                     [routerLink]="['/profile']"
                     routerLinkActive="router-link-active"
                     (click)="onDiscard()"
-
                   />
                 </div>
               </div>
             </form>
           </div>
         </div>
-        <!-- <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="d-flex align-items-center mb-3">Project Status</h5>
-                                <p>Web Design</p>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p>Website Markup</p>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p>One Page</p>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p>Mobile Template</p>
-                                <div class="progress mb-3" style="height: 5px">
-                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                                <p>Backend API</p>
-                                <div class="progress" style="height: 5px">
-                                    <div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+        <!-- here paswword-->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header" *ngIf="!toggle">
+                <button
+                  (click)="toggle = !toggle"
+                  style="min-width: 100%"
+                  class="btn btn-primary"
+                >
+                  Click to Edit password
+                </button>
+              </div>
+              <form [formGroup]="editpass" (ngSubmit)="onsubmitpass()">
+                <div class="card-body" *ngIf="toggle">
+                  <div class="form-group">
+                    <label for="password">New Password : </label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name=""
+                      id="password"
+                      formControlName="password"
+                    />
+                    <small
+                      class="errormessage"
+                      *ngIf="
+                        !this.editpass.get('password').valid &&
+                        this.editpass.get('password').touched
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          this.editpass.get('password').errors['required'] &&
+                          this.editpass.get('password').touched
+                        "
+                      >
+                        This feild is required
+                      </span>
+                      <span
+                        *ngIf="
+                          this.editpass.get('password').errors['minlength'] &&
+                          this.editpass.get('password').touched
+                        "
+                      >
+                        The password must have at least 6 character.
+                      </span>
+                    </small>
+                  </div>
+                  <!-- confirm password -->
+                  <div class="form-group">
+                    <label for="password2">Confirme New Password : </label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name=""
+                      id="password2"
+                      formControlName="password2"
+                    />
+                    <small
+                      class="errormessage"
+                      *ngIf="
+                        !this.editpass.get('password2').valid &&
+                        this.editpass.get('password2').touched
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          this.editpass.get('password2').errors['required'] &&
+                          this.editpass.get('password2').touched
+                        "
+                      >
+                        This feild is required .
+                      </span>
+                      <span
+                        *ngIf="
+                          this.editpass.get('password2').errors['NoMatch'] &&
+                          this.editpass.get('password2').touched &&
+                          this.editpass.controls.password2.value !== null
+                        "
+                      >
+                        The password does not match .
+                      </span>
+                    </small>
+                  </div>
+                </div>
+                <div class="card-footer" *ngIf="toggle">
+                  <button
+                    [disabled]="!this.editpass.valid"
+                    type="submit"
+                    class="btn btn-primary"
+                    
+                  >
+                    save
+                  </button>
+
+                  <button
+                    (click)="toggle = !toggle"
+                    type="button"
+                    class="btn btn-danger"
+                  >
+                    cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

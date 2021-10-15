@@ -14,9 +14,15 @@ export class EditComponent implements OnInit {
   user: any
   id: any
   editForm: FormGroup
-  constructor(private http: HttpService  ,
-     private  router :Router , 
-     private toaster :ToasterService) { }
+  editpass: FormGroup
+  toggle = false
+  pass = ''
+
+
+
+  constructor(private http: HttpService,
+    private router: Router,
+    private toaster: ToasterService) { }
 
   ngOnInit(): void {
     // collecting  id of user connected 
@@ -33,26 +39,35 @@ export class EditComponent implements OnInit {
     })
     // import user infos 
     this.user = localStorage.getItem("user");
-    this.user = JSON.parse(this.user)
+    this.user = JSON.parse(this.user);
     setInterval(() => {
-      this.isloading= false 
+      this.isloading = false
     }, 500);
 
 
     // setting up the form 
     this.editForm = new FormGroup({
-      "firstname": new FormControl(this.user.firstname , Validators.required),
-      "lastname": new FormControl(this.user.lastname , Validators.required),
+      "firstname": new FormControl(this.user.firstname, Validators.required),
+      "lastname": new FormControl(this.user.lastname, Validators.required),
       "age": new FormControl(this.user.age),
-      "pseudo": new FormControl(this.user.pseudo , Validators.required),
+      "pseudo": new FormControl(this.user.pseudo, Validators.required),
       "country": new FormControl({ value: this.user.country, disabled: true }),
       "email": new FormControl({ value: this.user.email, disabled: true }),
       "phone": new FormControl(this.user.phone),
 
     });
+    this.editpass = new FormGroup({
+      "password": new FormControl(null,[Validators.required ,Validators.minLength(6)]),
+      "password2": new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
+    })
 
     this.editForm.valueChanges.subscribe( // this is for updating form in real time  via subscription 
       (value: any) => {
+      }
+    );
+    this.editpass.valueChanges.subscribe( // this is for updating form in real time  via subscription 
+      (value: any) => {
+        this.pass = value.password;
       }
     );
 
@@ -63,19 +78,25 @@ export class EditComponent implements OnInit {
   onsubmit() {
     this.http.updateUser(this.id, this.editForm.value).subscribe(res => {
       this.router.navigate(["/profile"])
-      this.toaster.pop("success" ,this.user.pseudo +" Profile Page" , " Has been Edited .")
+      this.toaster.pop("success", this.user.pseudo + " Profile Page", " Has been Edited .")
 
     }, err => {
       console.log(err);
-      this.toaster.pop("warning" ,"Edit profile Failer " , err.error.message )
-      this.toaster.pop("warning" ,"Edit profile Failer " , err.message )
+      this.toaster.pop("warning", "Edit profile Failer ", err.error.message)
+      this.toaster.pop("warning", "Edit profile Failer ", err.message)
 
     })
 
   }
-  // on discard changes 
-  onDiscard(){
-    this.toaster.pop("warning" ,"Edit profile Failer " ,"All changes are Lost" )
+  onsubmitpass() {
 
   }
+
+  // this is a personalised validators for checking the confirmation password 
+  confirmPassword(control: FormControl | any): { [s: string]: Boolean } | null {
+    if (this.pass !== control.value) {
+      return { 'NoMatch': true };
+    } return null
+  }
+
 }
