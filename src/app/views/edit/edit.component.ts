@@ -89,7 +89,13 @@ export class EditComponent implements OnInit {
 
   }
   onsubmitpass() {
-
+    this.http.Changepass(this.id , this.editpass.value).subscribe(res=>{
+      console.log(res);
+      
+    },err=>{
+      console.log(err.error.message);
+      
+    })
   }
 
   // this is a personalised validators for checking the confirmation password 

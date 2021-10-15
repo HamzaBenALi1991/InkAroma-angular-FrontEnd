@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResolveData } from '@angular/router';
 import { ToastComponent, ToasterModule, ToasterService } from 'angular2-toaster';
 import { AuthServiceService } from '../../services/auth-service.service';
 
@@ -14,7 +15,7 @@ export class ProfileComponent implements OnInit {
   id: any
   isloading = true 
   user :any 
-  age :any
+  age  :any
   // public url: SafeResourceUrl;
 
   constructor(private http: HttpService 
@@ -41,7 +42,6 @@ export class ProfileComponent implements OnInit {
       this.user = res
       localStorage.setItem('user', JSON.stringify(this.user))
       localStorage.setItem('image', this.user.image)
-
     }, err => {
       console.log(err);
     })
@@ -49,10 +49,10 @@ export class ProfileComponent implements OnInit {
     this.user = localStorage.getItem("user");
     this.user = JSON.parse(this.user); 
 
-    this.age = this.auth.ageCalculated(this.user.age)
     setInterval(() => {
+      this.age = this.auth.ageCalculated(this.user.age)
       this.isloading= false 
-    }, 500);
+    }, 1500);
 
 
     // 
