@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
 import { HttpService } from '../../services/http.service';
 
 @Component({
@@ -13,7 +14,9 @@ export class EditComponent implements OnInit {
   user: any
   id: any
   editForm: FormGroup
-  constructor(private http: HttpService  ,private  router :Router) { }
+  constructor(private http: HttpService  ,
+     private  router :Router , 
+     private toaster :ToasterService) { }
 
   ngOnInit(): void {
     // collecting  id of user connected 
@@ -38,16 +41,20 @@ export class EditComponent implements OnInit {
 
     // setting up the form 
     this.editForm = new FormGroup({
-      "firstname": new FormControl(this.user.firstname),
-      "lastname": new FormControl(this.user.lastname),
+      "firstname": new FormControl(this.user.firstname , Validators.required),
+      "lastname": new FormControl(this.user.lastname , Validators.required),
       "age": new FormControl(this.user.age),
-      "pseudo": new FormControl(this.user.pseudo),
+      "pseudo": new FormControl(this.user.pseudo , Validators.required),
       "country": new FormControl({ value: this.user.country, disabled: true }),
       "email": new FormControl({ value: this.user.email, disabled: true }),
       "phone": new FormControl(this.user.phone),
 
+    });
 
-    })
+    this.editForm.valueChanges.subscribe( // this is for updating form in real time  via subscription 
+      (value: any) => {
+      }
+    );
 
   }
 
@@ -55,12 +62,20 @@ export class EditComponent implements OnInit {
   // profile infos changes 
   onsubmit() {
     this.http.updateUser(this.id, this.editForm.value).subscribe(res => {
-      console.log(res);
       this.router.navigate(["/profile"])
+      this.toaster.pop("success" ,this.user.pseudo +" Profile Page" , " Has been Edited .")
+
     }, err => {
       console.log(err);
+      this.toaster.pop("warning" ,"Edit profile Failer " , err.error.message )
+      this.toaster.pop("warning" ,"Edit profile Failer " , err.message )
 
     })
+
+  }
+  // on discard changes 
+  onDiscard(){
+    this.toaster.pop("warning" ,"Edit profile Failer " ,"All changes are Lost" )
 
   }
 }

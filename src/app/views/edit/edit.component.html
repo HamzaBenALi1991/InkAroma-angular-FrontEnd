@@ -1,5 +1,9 @@
 <div class="container">
-  <div *ngIf="isloading" class="lds-hourglass" style="margin-top: 30%; margin-left: 50%;"></div>
+  <div
+    *ngIf="isloading"
+    class="lds-hourglass"
+    style="margin-top: 30%; margin-left: 50%"
+  ></div>
   <div class="main-body" *ngIf="!isloading">
     <div class="row">
       <div class="col-lg-4">
@@ -13,7 +17,7 @@
                 width="110"
               />
               <div class="mt-3">
-                <h4>{{ user.pseudo | titlecase  }}</h4>
+                <h4>{{ user.pseudo | titlecase }}</h4>
                 <p class="text-muted font-size-sm">From: {{ user.country }}</p>
                 <!-- <button class="btn btn-primary">Follow</button>
                                 <button class="btn btn-outline-primary">Message</button> -->
@@ -48,7 +52,7 @@
       <div class="col-lg-8">
         <div class="card">
           <div class="card-header">
-            <h4>Edit  Personel Information</h4>
+            <h4>Edit Personel Information</h4>
           </div>
           <div class="card-body">
             <form [formGroup]="editForm" (ngSubmit)="onsubmit()">
@@ -65,6 +69,15 @@
                     value="{{ user.pseudo | titlecase }}"
                     formControlName="pseudo"
                   />
+                  <small
+                  class="errormessage"
+                  *ngIf="
+                    !this.editForm.get('pseudo').valid &&
+                    this.editForm.get('pseudo').touched
+                  "
+                >
+                  This feild is required.
+                </small>
                 </div>
               </div>
               <!-- firstname input -->
@@ -80,6 +93,15 @@
                     value="{{ user.firstname | titlecase }}"
                     formControlName="firstname"
                   />
+                  <small
+                  class="errormessage"
+                  *ngIf="
+                    !this.editForm.get('firstname').valid &&
+                    this.editForm.get('firstname').touched
+                  "
+                >
+                  This feild is required.
+                </small>
                 </div>
               </div>
               <!-- lastname input -->
@@ -93,7 +115,17 @@
                     type="text"
                     class="form-control"
                     value="{{ user.lastname }}"
+                    formControlName="lastname"
                   />
+                  <small
+                  class="errormessage"
+                  *ngIf="
+                    !this.editForm.get('lastname').valid &&
+                    this.editForm.get('lastname').touched
+                  "
+                >
+                  This feild is required.
+                </small>
                 </div>
               </div>
               <!-- email  input -->
@@ -148,15 +180,16 @@
                   <label for="age">Date of birth </label>
                 </div>
                 <div class="col-sm-9 text-secondary">
-                <input type="date"
-                    formControlName="age" 
+                  <input
+                    type="date"
+                    formControlName="age"
                     id="age"
-                    class="form-control"    
-                    value ='{{user.age}}'
-                >
+                    class="form-control"
+                    value="{{ user.age }}"
+                  />
                 </div>
               </div>
-              <hr>
+              <hr />
               <!-- button -->
               <div class="row input-group form-group justify-content-between">
                 <div class="col-sm-3 text-secondary">
@@ -164,14 +197,18 @@
                     type="submit"
                     class="btn btn-primary px-4"
                     value="Save Changes"
+                    [disabled]="!this.editForm.valid"
                   />
                 </div>
                 <div class="col-sm-3 text-secondary">
                   <input
                     type="button"
                     class="btn btn-danger px-4"
-                    value="Discard Changes"
-                    [routerLink]="['/profile']" routerLinkActive="router-link-active" 
+                    value="Cancel changes"
+                    [routerLink]="['/profile']"
+                    routerLinkActive="router-link-active"
+                    (click)="onDiscard()"
+
                   />
                 </div>
               </div>

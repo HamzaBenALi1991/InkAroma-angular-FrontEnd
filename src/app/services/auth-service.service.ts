@@ -20,5 +20,11 @@ export class AuthServiceService {
     localStorage.clear()
   }
 
+  ageCalculated (data :any){
+    let timeDiff = Math.abs(Date.now() - new Date(data).getTime());
+    let agee = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+    return agee 
+  }
+
 
 }

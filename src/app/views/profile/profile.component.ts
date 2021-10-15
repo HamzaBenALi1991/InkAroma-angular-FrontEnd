@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastComponent, ToasterModule, ToasterService } from 'angular2-toaster';
+import { AuthServiceService } from '../../services/auth-service.service';
 
 import { HttpService } from '../../services/http.service';
 
@@ -12,9 +14,12 @@ export class ProfileComponent implements OnInit {
   id: any
   isloading = true 
   user :any 
+  age :any
   // public url: SafeResourceUrl;
 
-  constructor(private http: HttpService) {
+  constructor(private http: HttpService 
+    ,private auth :AuthServiceService ,
+    private toester :ToasterService) {
     //  this.getImage('URL').subscribe(x => this.url = x)
   }
 
@@ -42,7 +47,9 @@ export class ProfileComponent implements OnInit {
     })
     // import user infos 
     this.user = localStorage.getItem("user");
-    this.user = JSON.parse(this.user)
+    this.user = JSON.parse(this.user); 
+
+    this.age = this.auth.ageCalculated(this.user.age)
     setInterval(() => {
       this.isloading= false 
     }, 500);
@@ -59,6 +66,9 @@ export class ProfileComponent implements OnInit {
 
     // })
 
+  }
+  onedit(){
+    this.toester.pop("primary" , this.user.pseudo +' Infos' , "Edit profile page ")
   }
 
 }
