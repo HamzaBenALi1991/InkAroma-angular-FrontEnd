@@ -27,7 +27,6 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     // collecting  id of user connected 
     this.id = localStorage.getItem('_Id')
-    console.log(typeof (this.id));
     // get the user connected 
     this.http.getOneUser(this.id).subscribe(res => {
       this.user = res
@@ -57,7 +56,7 @@ export class EditComponent implements OnInit {
 
     });
     this.editpass = new FormGroup({
-      "password": new FormControl(null,[Validators.required ,Validators.minLength(6)]),
+      "password": new FormControl(null, [Validators.required, Validators.minLength(6)]),
       "password2": new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
     })
 
@@ -89,12 +88,13 @@ export class EditComponent implements OnInit {
 
   }
   onsubmitpass() {
-    this.http.Changepass(this.id , this.editpass.value).subscribe(res=>{
+    this.http.Changepass(this.id, this.editpass.value).subscribe(res => {
       console.log(res);
-      
-    },err=>{
+      this.toaster.pop("success", "WELL DONE !!!", "Password has been updated successfully ");
+      this.toggle=!this.toggle
+    }, err => {
       console.log(err.error.message);
-      
+
     })
   }
 

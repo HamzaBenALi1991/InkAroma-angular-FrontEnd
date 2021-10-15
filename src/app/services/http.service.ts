@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -98,7 +99,7 @@ export class HttpService {
   uploadImage(formData: FormData, id: any) {
     return this.http.post(`http://localhost:3000/upload/${id}`, formData)
   }
-  //////////// upload imag FROM backEND 
+  //////////// upload imag FROM backEND  ////////////////
   getImage(data: any) {
     return this.http.get(`http://localhost:3000/sentImage`, data)
   }
