@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HttpService {
 
+
   constructor(private http: HttpClient) { }
   ///////////////////////////////////////////////////////////////////////////
   ///////////////////////////// User Api services //////////////////////
@@ -22,9 +23,7 @@ export class HttpService {
   deleteUser(id: number) {
     return this.http.delete(`http://localhost:3000/user/${id}`)
   }
-  createUser(body: any) {
-    return this.http.post("http://localhost:3000/newuser", body)
-  }
+
   // login 
   login(body: any) {
     return this.http.post(`http://localhost:3000/login`, body)
@@ -49,6 +48,17 @@ export class HttpService {
 
   Changepass(id: any, body: any) {
     return this.http.put(`http://localhost:3000/changepassword/${id}`, body)
+  }
+
+  addProfile(name: any, image: any)  {
+    name = JSON.stringify(name)
+    const profileData = new FormData();
+    profileData.append("user", name);
+    profileData.append("image", image);
+    console.log(profileData);
+
+   return this.http.post("http://localhost:3000/newuser", profileData)
+      
   }
 
 
@@ -103,10 +113,7 @@ export class HttpService {
   getImage(data: any) {
     return this.http.get(`http://localhost:3000/sentImage`, data)
   }
-  ///try 
-  try(data: any) {
-    return this.http.get(`http://localhost:3000/image`, data)
-  }
+
 
 
 }

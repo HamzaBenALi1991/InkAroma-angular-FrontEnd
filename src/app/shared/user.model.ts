@@ -21,7 +21,7 @@ export class UsertypeModule {
         lastname: String,
         country: String,
         image: String,
-        phone: any
+        phone: any,
     ) {
         this.pseudo = pseudo;
         this.email = email;

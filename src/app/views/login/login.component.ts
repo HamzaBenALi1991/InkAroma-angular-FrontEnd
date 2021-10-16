@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
     this.showNotifications();
     // quotes generator 
     setInterval(() => {
-
       this.quote = this.quoetes[(Math.random() * this.quoetes.length) | 0]
       this.quote = this.quote.quotes
 

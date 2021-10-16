@@ -8,6 +8,7 @@ input.ng-invalid.ng-touched {
   }
   .errormessage {
     color :red ; 
+    display: block !important;
   }
   // this is for email existing 
   .thisiswrong {
@@ -15,7 +16,7 @@ input.ng-invalid.ng-touched {
     display: none ;
   }
   .show{
-      display: inline-block;
+      display: block;
   }
   // loader spinning 
   .lds-hourglass {

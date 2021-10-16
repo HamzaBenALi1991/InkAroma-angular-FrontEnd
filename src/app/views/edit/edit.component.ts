@@ -3,6 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { HttpService } from '../../services/http.service';
+import { ProfileServiceService } from '../../services/profile-service.service';
+import { countries } from '../../shared/component/store/country-data';
+import { Countries } from '../../shared/country.model';
 
 @Component({
   selector: 'app-edit',
@@ -16,13 +19,16 @@ export class EditComponent implements OnInit {
   editForm: FormGroup
   editpass: FormGroup
   toggle = false
-  pass = ''
+  pass = '';
+  age :any
+  public countries:Countries[]=countries
 
 
 
   constructor(private http: HttpService,
     private router: Router,
-    private toaster: ToasterService) { }
+    private toaster: ToasterService,
+    private profileService: ProfileServiceService) { }
 
   ngOnInit(): void {
     // collecting  id of user connected 
@@ -39,9 +45,13 @@ export class EditComponent implements OnInit {
     // import user infos 
     this.user = localStorage.getItem("user");
     this.user = JSON.parse(this.user);
-    setInterval(() => {
+    setTimeout(() => {
+      if (this.user.image != "http://localhost:3000/uploads/users/download.jpeg") {
+        this.user.image = "http://localhost:3000/uploads/users/" + this.user.image
+      }
+      this.age = this.profileService.ageCalculated(this.user.age)
       this.isloading = false
-    }, 500);
+    }, 1500);
 
 
     // setting up the form 
@@ -50,7 +60,7 @@ export class EditComponent implements OnInit {
       "lastname": new FormControl(this.user.lastname, Validators.required),
       "age": new FormControl(this.user.age),
       "pseudo": new FormControl(this.user.pseudo, Validators.required),
-      "country": new FormControl({ value: this.user.country, disabled: true }),
+      "country": new FormControl(null,Validators.required),
       "email": new FormControl({ value: this.user.email, disabled: true }),
       "phone": new FormControl(this.user.phone),
 
@@ -75,6 +85,8 @@ export class EditComponent implements OnInit {
 
   // profile infos changes 
   onsubmit() {
+    console.log(this.editForm.value);
+    
     this.http.updateUser(this.id, this.editForm.value).subscribe(res => {
       this.router.navigate(["/profile"])
       this.toaster.pop("success", this.user.pseudo + " Profile Page", " Has been Edited .")
@@ -91,7 +103,7 @@ export class EditComponent implements OnInit {
     this.http.Changepass(this.id, this.editpass.value).subscribe(res => {
       console.log(res);
       this.toaster.pop("success", "WELL DONE !!!", "Password has been updated successfully ");
-      this.toggle=!this.toggle
+      this.toggle = !this.toggle
     }, err => {
       console.log(err.error.message);
 

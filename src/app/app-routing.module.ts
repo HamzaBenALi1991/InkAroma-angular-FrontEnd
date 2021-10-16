@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full',  
+    pathMatch: 'full',
   },
   {
     path: '404',
@@ -68,7 +68,7 @@ export const routes: Routes = [
     }
   },
   {
-    path: '', canActivate : [AuthGuardGuard],
+    path: '', canActivate: [AuthGuardGuard],
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
@@ -132,6 +132,7 @@ export const routes: Routes = [
       },
       { path: 'profile', loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule) },
       { path: 'edit', loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule) },
+      { path: 'profiles', loadChildren: () => import('./views/allprofiles/allprofiles.module').then(m => m.AllprofilesModule) },
     ]
   },
   { path: '**', component: P404Component }

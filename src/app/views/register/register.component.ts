@@ -23,21 +23,27 @@ export class RegisterComponent implements OnInit {
   imageuploaded: any
   isloading = false
   formdata = new FormData();
+  imageData: string
+  regexPhone = /^[0-9]{5,10}$/
+  regexEmail = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/
+  regexname = /^[A-Za-z][a-zA-Z]+$/
+
 
 
 
   ngOnInit() {
+
     // reactive form set up 
     this.SignUpForm = new FormGroup({
       "pseudo": new FormControl(null, Validators.required),
-      "email": new FormControl(null, [Validators.required, Validators.email]),
+      "email": new FormControl(null, [Validators.required, Validators.pattern(this.regexEmail)]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)]),
       "password2": new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
-      "firstname": new FormControl(null, Validators.required),
-      "lastname": new FormControl(null, Validators.required),
+      "firstname": new FormControl(null, [Validators.required, Validators.pattern(this.regexname)]),
+      "lastname": new FormControl(null, [Validators.required, Validators.pattern(this.regexname)]),
       "age": new FormControl(null),
       "country": new FormControl(null),
-      "phone": new FormControl(null),
+      "phone": new FormControl(null, Validators.pattern(this.regexPhone)),
       "image": new FormControl(null),
 
     });
@@ -48,63 +54,58 @@ export class RegisterComponent implements OnInit {
         this.status = this.SignUpForm.status === 'VALID' ? true : false // this is for updating disablied button 
       }
     );
-
   }
-  // Onchange handler 
-  selectImage(e: any) {
-    // caught image file in change 
-    if (e.target.files.length > 0) {
-      this.imageuploaded = e.target.files[0];
-      console.log(this.imageuploaded);
+  // on change file 
+  onFileSelect(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+
+    this.SignUpForm.patchValue({ image: file });
+
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+
     }
-  };
-
-  // form sabmit
-  onsubmit() {
-    //spiner 
-    this.isloading = true
-    // create the user
-    let user: any
-    this.http.createUser(this.SignUpForm.value).subscribe(res => {
-      console.log(res);
-      user = res
-      this.SignUpForm.reset()
-      // for notification at top 
-      this.toasterService.pop("succes", "Registration succeeded", "See you at Login !");
-      //redirect to login page 
-      setTimeout(() => {
-        this.router.navigate(['login'])
-      }, 3000);
-      // in case file image upload summon a new http request to handle it 
-      if (this.imageuploaded) {
-        this.formdata.append('file', this.imageuploaded)
-        this.http.uploadImage(this.formdata, user.user._id).subscribe(res => {
-
-        }, err => {
-          this.toasterService.pop("error", "Registration Failer ", err.error.message);
-
-        })
-      }
-
-    }, err => {
-      if (err.error === "Email alreadt exist") {
-        this.toasterService.pop('error', 'Registeration  Failed  ', 'Email alreadt exist');
-        let part = this.element.nativeElement.querySelector('.thisiswrong')
-        this.path.addClass(part, 'show')
-      } else {
-        this.router.navigate(['500'])
-      }
-
-    });
-
-
-
-  };
+  }
   // this is a personalised validators for checking the confirmation password 
   confirmPassword(control: FormControl | any): { [s: string]: Boolean } | null {
     if (this.pass !== control.value) {
       return { 'NoMatch': true };
     } return null
+  }
+
+  // on form submit 
+  onsubmit() {
+    this.http.addProfile(this.SignUpForm.value, this.SignUpForm.value.image).subscribe(res => {
+      //spiner 
+      this.isloading = true
+      this.SignUpForm.reset();
+      this.toasterService.pop("succes", "Registration succeeded", "See you at Login !");
+      //redirect to login page 
+      setTimeout(() => {
+        this.isloading = false
+        this.router.navigate(['login'])
+      }, 3000);
+
+    }, err => {
+      if (err.error === "Email alreadt exist") {
+        this.toasterService.pop('error', 'Registeration  Failed  ', 'Email alreadt exist');
+        let part = this.element.nativeElement.querySelector('.thisiswrong')
+        this.path.addClass(part, 'show');
+
+      } else {
+        this.isloading = false
+        this.router.navigate(['500'])
+      }
+
+
+    })
+
+
   }
 
 }

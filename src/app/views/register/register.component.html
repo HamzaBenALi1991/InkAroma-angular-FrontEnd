@@ -13,8 +13,18 @@
             </div>
             <div class="card-body p-4">
               <!-- creative form  for user registration -->
-              <form [formGroup]="SignUpForm" (ngSubmit)="onsubmit()">
+              <div
+                *ngIf="isloading"
+                style="margin-left: 40%"
+                class="lds-hourglass"
+              ></div>
+              <form
+                *ngIf="!isloading"
+                [formGroup]="SignUpForm"
+                (ngSubmit)="onsubmit()"
+              >
                 <h1>Register</h1>
+
                 <p class="text-muted">Create your account</p>
                 <!-- pseudo input -->
                 <div class="input-group mb-2 form-group">
@@ -24,7 +34,7 @@
                     ></span>
                   </div>
                   <input
-                    style="min-width: 70%"
+                    style="min-width: 85%"
                     type="text"
                     class="form-control"
                     placeholder="pseudo"
@@ -52,7 +62,7 @@
                     class="form-control"
                     placeholder="Email"
                     formControlName="email"
-                    style="min-width: 70%"
+                    style="min-width: 85%"
                   />
                   <!-- email error handlying -->
 
@@ -73,7 +83,7 @@
                     </span>
                     <span
                       *ngIf="
-                        this.SignUpForm.get('email').errors['email'] &&
+                        this.SignUpForm.get('email').errors['pattern'] &&
                         this.SignUpForm.get('email').touched
                       "
                     >
@@ -97,7 +107,7 @@
                     class="form-control"
                     placeholder="Password"
                     formControlName="password"
-                    style="min-width: 70%"
+                    style="min-width: 85%"
                   />
                   <small
                     class="errormessage"
@@ -138,9 +148,10 @@
                     class="form-control"
                     placeholder="Repeat password"
                     formControlName="password2"
-                    style="min-width: 70%"
+                    style="min-width: 85%"
                   />
                   <small
+                    style="display: block"
                     class="errormessage"
                     *ngIf="
                       !this.SignUpForm.get('password2').valid &&
@@ -178,7 +189,7 @@
                     class="form-control"
                     placeholder="Firstname "
                     formControlName="firstname"
-                    style="min-width: 70%"
+                    style="min-width: 85%"
                   />
                   <small
                     class="errormessage"
@@ -187,7 +198,23 @@
                       this.SignUpForm.get('firstname').touched
                     "
                   >
-                    This feild is required.
+                  <span
+                  *ngIf="
+                    this.SignUpForm.get('firstname').errors['required'] &&
+                    this.SignUpForm.get('firstname').touched
+                  "
+                >
+                  This feild is required .
+                </span>
+                <span
+                  *ngIf="
+                    this.SignUpForm.get('firstname').errors['pattern'] &&
+                    this.SignUpForm.get('firstname').touched
+                  "
+                >
+                  This Firstname format is incorrect . please use ony characters.
+                </span>
+                
                   </small>
                 </div>
                 <!-- lastname input -->
@@ -202,7 +229,7 @@
                     class="form-control"
                     placeholder="Lastname"
                     formControlName="lastname"
-                    style="min-width: 70%"
+                    style="min-width: 85%"
                   />
                   <small
                     class="errormessage"
@@ -211,7 +238,22 @@
                       this.SignUpForm.get('lastname').touched
                     "
                   >
-                    This feild is required.
+                  <span
+                  *ngIf="
+                    this.SignUpForm.get('lastname').errors['required'] &&
+                    this.SignUpForm.get('lastname').touched
+                  "
+                >
+                  This feild is required .
+                </span>
+                <span
+                  *ngIf="
+                    this.SignUpForm.get('lastname').errors['pattern'] &&
+                    this.SignUpForm.get('lastname').touched
+                  "
+                >
+                  This Firstname format is incorrect . please use ony characters.
+                </span>
                   </small>
                 </div>
                 <!-- country  input -->
@@ -254,6 +296,15 @@
                     formControlName="phone"
                   />
                 </div>
+                <small
+                  class="errormessage"
+                  *ngIf="
+                    !this.SignUpForm.get('phone').valid &&
+                    this.SignUpForm.get('phone').touched
+                  "
+                >
+                  Your phone Number is wrong .
+                </small>
                 <!-- age input -->
                 <div class="input-group mb-2 form-group">
                   <div class="input-group-prepend">
@@ -277,10 +328,13 @@
                   </div>
                   <input
                     type="file"
-                    formControlName="image"
                     class="form-control"
-                    (change)="selectImage($event)"
+                    (change)="onFileSelect($event)"
                   />
+                </div>
+
+                <div *ngIf="imageData">
+                  <img [src]="imageData" alt="" width="100%" />
                 </div>
 
                 <button
@@ -299,6 +353,7 @@
           </div>
         </div>
       </div>
+      <div class="row"></div>
     </div>
   </main>
 </div>

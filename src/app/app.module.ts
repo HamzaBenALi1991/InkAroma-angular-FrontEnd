@@ -37,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { YourInterceptor } from './services/token-intercepter.service';
+import { ProfileServiceService } from './services/profile-service.service';
 
 @NgModule({
   imports: [
@@ -76,7 +77,7 @@ import { YourInterceptor } from './services/token-intercepter.service';
     useClass: HashLocationStrategy,
 
   },
-    ToasterService
+    ToasterService,ProfileServiceService
   ],
   bootstrap: [AppComponent]
 })

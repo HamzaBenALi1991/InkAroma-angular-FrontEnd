@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ResolveData } from '@angular/router';
-import { ToastComponent, ToasterModule, ToasterService } from 'angular2-toaster';
-import { AuthServiceService } from '../../services/auth-service.service';
-
 import { HttpService } from '../../services/http.service';
+import { ToasterService } from 'angular2-toaster';
+import { AuthServiceService } from '../../services/auth-service.service';
+import { ProfileServiceService } from '../../services/profile-service.service';
+
+
 
 @Component({
   selector: 'app-profile',
@@ -11,31 +12,27 @@ import { HttpService } from '../../services/http.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  // origin that works
   image: any
   id: any
-  isloading = true 
-  user :any 
-  age  :any
-  // public url: SafeResourceUrl;
+  isloading = true
+  user: any
+  age: any
+  // origin that works end here 
 
-  constructor(private http: HttpService 
-    ,private auth :AuthServiceService ,
-    private toester :ToasterService) {
+
+
+
+  constructor(private http: HttpService
+    , private profileService: ProfileServiceService,
+    private toester: ToasterService) {
     //  this.getImage('URL').subscribe(x => this.url = x)
   }
 
-  //  public getImage(url: string): Observable<SafeResourceUrl> {
-  //    return this.http2
-  //      .get(url, { responseType: 'blob' })
-  //      .pipe(
-  //        map(x => {
-  //          const urlToBlob = window.URL.createObjectURL(x) // get a URL for the blob
-  //          return this.sanitizer.bypassSecurityTrustResourceUrl(urlToBlob); // tell Anuglar to trust this value
-  //        }),
-  //      );
-  //  }
+
   ngOnInit(): void {
-    
+
+    // origin that works end here 
     this.id = localStorage.getItem('_Id')
     this.http.getOneUser(this.id).subscribe(res => {
 
@@ -47,28 +44,18 @@ export class ProfileComponent implements OnInit {
     })
     // import user infos 
     this.user = localStorage.getItem("user");
-    this.user = JSON.parse(this.user); 
+    this.user = JSON.parse(this.user);
 
-    setInterval(() => {
-      this.age = this.auth.ageCalculated(this.user.age)
-      this.isloading= false 
+    setTimeout(() => {
+      if (this.user.image != "http://localhost:3000/uploads/users/download.jpeg") {
+        this.user.image = "http://localhost:3000/uploads/users/" + this.user.image
+      } 
+      this.age = this.profileService.ageCalculated(this.user.age)
+      this.isloading = false
     }, 1500);
-
-
-    // 
-    // this.image= localStorage.getItem('image')
-    // console.log(this.image);
-
-    // this.http.getImage({image : this.image}).subscribe(res=>{
-    //   alert(res)
-    // },err =>{
-    //   console.log(err);
-
-    // })
-
   }
-  onedit(){
-    this.toester.pop("primary" , this.user.pseudo +' Infos' , "Edit profile page ")
+  onedit() {
+    this.toester.pop("primary", this.user.pseudo + ' Infos', "Edit profile page ")
   }
 
 }
