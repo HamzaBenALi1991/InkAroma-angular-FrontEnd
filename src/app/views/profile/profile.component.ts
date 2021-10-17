@@ -35,12 +35,13 @@ export class ProfileComponent implements OnInit {
     // origin that works end here 
     this.id = localStorage.getItem('_Id')
     this.http.getOneUser(this.id).subscribe(res => {
-
       this.user = res
       localStorage.setItem('user', JSON.stringify(this.user))
       localStorage.setItem('image', this.user.image)
     }, err => {
       console.log(err);
+      console.log(err.error.message);
+      
     })
     // import user infos 
     this.user = localStorage.getItem("user");

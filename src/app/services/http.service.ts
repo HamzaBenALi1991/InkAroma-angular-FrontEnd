@@ -60,6 +60,9 @@ export class HttpService {
    return this.http.post("http://localhost:3000/newuser", profileData)
       
   }
+  addImage(file :FormData , id :any ){
+    return this.http.put(`http://localhost:3000/upload/${id}`, file)
+  }
 
 
   ///////////////////////////////////////////////////////////////////////////
@@ -105,14 +108,7 @@ export class HttpService {
   createReview(body: any) {
     return this.http.post(`http://localhost:3000/newreview`, body)
   }
-  ////////////:: image only upload to backEnd ///////////////////:
-  uploadImage(formData: FormData, id: any) {
-    return this.http.post(`http://localhost:3000/upload/${id}`, formData)
-  }
-  //////////// upload imag FROM backEND  ////////////////
-  getImage(data: any) {
-    return this.http.get(`http://localhost:3000/sentImage`, data)
-  }
+ 
 
 
 

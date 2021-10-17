@@ -20,8 +20,10 @@ export class EditComponent implements OnInit {
   editpass: FormGroup
   toggle = false
   pass = '';
-  age :any
-  public countries:Countries[]=countries
+  age: any
+  public countries: Countries[] = countries
+  image :FormData
+  imageData : string
 
 
 
@@ -60,7 +62,7 @@ export class EditComponent implements OnInit {
       "lastname": new FormControl(this.user.lastname, Validators.required),
       "age": new FormControl(this.user.age),
       "pseudo": new FormControl(this.user.pseudo, Validators.required),
-      "country": new FormControl(null,Validators.required),
+      "country": new FormControl(null, Validators.required),
       "email": new FormControl({ value: this.user.email, disabled: true }),
       "phone": new FormControl(this.user.phone),
 
@@ -86,7 +88,7 @@ export class EditComponent implements OnInit {
   // profile infos changes 
   onsubmit() {
     console.log(this.editForm.value);
-    
+
     this.http.updateUser(this.id, this.editForm.value).subscribe(res => {
       this.router.navigate(["/profile"])
       this.toaster.pop("success", this.user.pseudo + " Profile Page", " Has been Edited .")
@@ -115,6 +117,39 @@ export class EditComponent implements OnInit {
     if (this.pass !== control.value) {
       return { 'NoMatch': true };
     } return null
+  }
+
+
+  // on change image 
+  onFileSelect(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.image = new FormData(); 
+    this.image.append("file" , file )
+    console.log(this.image);
+    console.log(file);
+    
+    
+    
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+
+    }
+  }
+  onsaveImage(){
+    this.isloading=true 
+    this.http.addImage(this.image ,this.id).subscribe(res=>{
+      console.log(res);
+      this.router.navigate(['/profile'])
+      
+    },err=>{
+      console.log(err);
+      
+    })
   }
 
 }

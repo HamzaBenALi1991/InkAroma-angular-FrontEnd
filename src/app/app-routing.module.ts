@@ -4,6 +4,7 @@ import { AuthGuardGuard } from './auth-guard.guard';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { RedirectAuthenticatedGuard } from './redirect-authenticated.guard';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -34,27 +35,27 @@ export const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent,canActivate :[RedirectAuthenticatedGuard],
     data: {
       title: 'Login Page'
     }
   },
   {
     path: 'login/forget',
-    component: ForgetPasswordComponent,
+    component: ForgetPasswordComponent,canActivate :[RedirectAuthenticatedGuard],
     data: {
       title: 'ForgetPassword Page'
     }
   },
   {
-    path: 'login/resetpassword',
+    path: 'login/resetpassword',canActivate :[RedirectAuthenticatedGuard],
     component: ResetComponent,
     data: {
       title: 'resetPassword Page'
     }
   },
   {
-    path: 'login/resetpassword/:resetLink',
+    path: 'login/resetpassword/:resetLink',canActivate :[RedirectAuthenticatedGuard],
     component: ResetComponent,
     data: {
       title: 'resetPassword Page'
@@ -62,7 +63,7 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterComponent,canActivate :[RedirectAuthenticatedGuard],
     data: {
       title: 'Register Page'
     }
