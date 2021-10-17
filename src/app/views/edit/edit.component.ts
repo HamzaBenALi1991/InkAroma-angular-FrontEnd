@@ -151,5 +151,20 @@ export class EditComponent implements OnInit {
       
     })
   }
+  onDelete(){
+    let person = prompt("Are you Sure you want to delete your account ?", "If Yes ,Write your Email if Yes");
+    if (person == this.user.email) {      
+      this.http.deleteUser(this.user._id).subscribe(res=>{
+        this.toaster.pop('warning' , "GoodBye"+ this.user.pseudo , "your account has been Deleted .");
+        this.router.navigate(['/login']) ; 
+        localStorage.clear()
+        
+      },err=>{
+      this.toaster.pop("error" , "Sorry!!!" ," AN internal Error has occured .")
+        
+      })      
+    }
+
+  }
 
 }

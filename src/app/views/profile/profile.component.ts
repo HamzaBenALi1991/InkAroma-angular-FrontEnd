@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { ToasterService } from 'angular2-toaster';
-import { AuthServiceService } from '../../services/auth-service.service';
 import { ProfileServiceService } from '../../services/profile-service.service';
+import { Observable, observable, Subject } from 'rxjs';
 
 
 
@@ -13,12 +13,10 @@ import { ProfileServiceService } from '../../services/profile-service.service';
 })
 export class ProfileComponent implements OnInit {
   // origin that works
-  image: any
   id: any
   isloading = true
   user: any
   age: any
-  // origin that works end here 
 
 
 
@@ -31,6 +29,8 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+  
+  
 
     // origin that works end here 
     this.id = localStorage.getItem('_Id')
@@ -50,13 +50,18 @@ export class ProfileComponent implements OnInit {
     setTimeout(() => {
       if (this.user.image != "http://localhost:3000/uploads/users/download.jpeg") {
         this.user.image = "http://localhost:3000/uploads/users/" + this.user.image
+
       } 
+
+
+
       this.age = this.profileService.ageCalculated(this.user.age)
       this.isloading = false
-    }, 1500);
+    }, 2000);
   }
   onedit() {
     this.toester.pop("primary", this.user.pseudo + ' Infos', "Edit profile page ")
   }
+  
 
 }

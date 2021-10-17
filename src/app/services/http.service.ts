@@ -20,7 +20,7 @@ export class HttpService {
   updateUser(id: any, body: any) {
     return this.http.put(`http://localhost:3000/user/${id}`, body)
   }
-  deleteUser(id: number) {
+  deleteUser(id: any) {
     return this.http.delete(`http://localhost:3000/user/${id}`)
   }
 
