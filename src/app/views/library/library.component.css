@@ -2,8 +2,16 @@
     min-height: 300px;
     min-width: 300px;
     margin-right: 5px;
+    max-width: 301px;
+    max-height: 301px;
 }
 ::-webkit-scrollbar {
     display: none;
     color: red;
+  }
+
+.cool {
+    border: 2px solid white;
+    border-radius: 10px;
+    padding: 2px;
   }
