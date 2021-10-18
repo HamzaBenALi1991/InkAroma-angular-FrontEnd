@@ -55,7 +55,6 @@ export class HttpService {
     const profileData = new FormData();
     profileData.append("user", name);
     profileData.append("image", image);
-    console.log(profileData);
 
    return this.http.post("http://localhost:3000/newuser", profileData)
       
@@ -79,8 +78,12 @@ export class HttpService {
   deleteBook(id: number) {
     return this.http.delete(`http://localhost:3000/book/${id}`)
   }
-  createBook(body: any) {
-    return this.http.post(`http://localhost:3000/newbook`, body)
+  createBook(name: any, image: any) {
+    name = JSON.stringify(name)
+    const bookData = new FormData();
+    bookData.append("book", name);
+    bookData.append("bookCover", image);
+    return this.http.post(`http://localhost:3000/newbook`, bookData)
   }
 
   // affect review 

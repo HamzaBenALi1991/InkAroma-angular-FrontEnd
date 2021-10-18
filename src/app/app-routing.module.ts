@@ -133,7 +133,7 @@ export const routes: Routes = [
       },
       { path: 'profile', loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule) },
       { path: 'edit', loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule) },
-      { path: 'profiles', loadChildren: () => import('./views/allprofiles/allprofiles.module').then(m => m.AllprofilesModule) },
+      { path: 'library', loadChildren: () => import('./views/library/library.module').then(m => m.LibraryModule) },
     ]
   },
   { path: '**', component: P404Component }

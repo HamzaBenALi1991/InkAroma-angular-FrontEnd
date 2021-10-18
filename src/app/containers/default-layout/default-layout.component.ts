@@ -36,9 +36,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.isloading= true
-    console.log( this.isloading);
-    
+    this.isloading= true    
     // origin that works end here 
     this.id = localStorage.getItem('_Id')
     this.http.getOneUser(this.id).subscribe(res => {

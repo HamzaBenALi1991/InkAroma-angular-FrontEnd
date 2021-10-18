@@ -1,0 +1,53 @@
+<div style="background-color: white; padding: 10%">
+  <h2>Add new Book</h2>
+  <form [formGroup]="bookForm" (ngSubmit)="OnSubmitBook()">
+          <!-- title -->
+    <div class="form-group">
+      <label style="margin-left: 10px" for="book">Book title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="book"
+        formControlName="title"
+      />
+    </div>
+        <!-- author -->
+    <div class="form-group">
+      <label style="margin-left: 10px" for="author">Author</label>
+      <input type="text" class="form-control" id="author" formControlName="author"/>
+    </div>
+    <!-- description -->
+    <div class="form-group">
+      <label for="description">Description </label>
+      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+    </div>
+        <!-- categorie -->
+    <div class="form-group">
+      <select
+        class="custom-select my-1 mr-sm-2"
+        id="inlineFormCustomSelectPref"
+        formControlName="categorie"
+      >
+        <option selected disabled>Choose...</option>
+        <option value="Sc-Fi">Sc-Fi</option>
+        <option value="Romantic">Romantic</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+        <option value="Historical">Historical</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Polictical">Polictical</option>
+        <option value="Detective">Detective</option>
+      </select>
+    </div>
+        <!-- image -->
+    <div class="form-group">
+      <label for="image">Book Cover</label>
+      <input (change)='onchange($event)' type="file" class="form-control" id="image" />
+      <div *ngIf="imageData">
+        <img [src]="imageData" alt="" width="100%" />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
