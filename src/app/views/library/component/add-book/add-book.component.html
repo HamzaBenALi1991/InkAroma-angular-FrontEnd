@@ -1,31 +1,73 @@
 <div style="background-color: white; padding: 10%">
   <h2>Add new Book</h2>
   <form [formGroup]="bookForm" (ngSubmit)="OnSubmitBook()">
-          <!-- title -->
+    <!-- title -->
     <div class="form-group">
-      <label style="margin-left: 10px" for="book">Book title</label>
+      <label style="margin-left: 10px" for="book">Book title*</label>
       <input
         type="text"
         class="form-control"
         id="book"
         formControlName="title"
       />
+      <small
+        style="color: red"
+        *ngIf="
+          !this.bookForm.get('title').valid &&
+          this.bookForm.get('title').touched
+        "
+      >
+        This feild is required.
+      </small>
     </div>
-        <!-- author -->
+    <!-- author -->
     <div class="form-group">
-      <label style="margin-left: 10px" for="author">Author</label>
-      <input type="text" class="form-control" id="author" formControlName="author"/>
+      <label style="margin-left: 10px" for="author">Author*</label>
+      <input
+        type="text"
+        class="form-control"
+        id="author"
+        formControlName="author"
+      />
+      <small
+        style="color: red"
+        *ngIf="
+          !this.bookForm.get('author').valid &&
+          this.bookForm.get('author').touched
+        "
+      >
+        This feild is required.
+      </small>
     </div>
     <!-- description -->
     <div class="form-group">
-      <label for="description">Description </label>
-      <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+      <label for="description">Description* </label>
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        formControlName="description"
+      ></textarea>
+      <small
+      
+        style="color: red;display: block;"
+        *ngIf="
+          !this.bookForm.get('description').valid &&
+          this.bookForm.get('description').touched
+        "
+      >
+        This feild is required.
+      </small>
+      <small style="color: rgb(255, 123, 0)"
+        >The description needs to be at least 50 characters .</small
+      >
     </div>
-        <!-- categorie -->
+    <!-- categorie -->
     <div class="form-group">
+      <label for="categorie">Categorie*</label>
       <select
         class="custom-select my-1 mr-sm-2"
-        id="inlineFormCustomSelectPref"
+        id="categorie"
         formControlName="categorie"
       >
         <option selected disabled>Choose...</option>
@@ -40,14 +82,26 @@
         <option value="Detective">Detective</option>
       </select>
     </div>
-        <!-- image -->
+    <!-- image -->
     <div class="form-group">
       <label for="image">Book Cover</label>
-      <input (change)='onchange($event)' type="file" class="form-control" id="image" />
+      <input
+        (change)="onchange($event)"
+        type="file"
+        class="form-control"
+        id="image"
+      />
       <div *ngIf="imageData">
         <img [src]="imageData" alt="" width="100%" />
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button
+      [disabled]="!status"
+      style="width: 100%"
+      type="submit"
+      class="btn btn-primary"
+    >
+      Submit
+    </button>
   </form>
 </div>

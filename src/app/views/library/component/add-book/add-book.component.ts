@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '../../../../services/http.service';
 
@@ -10,27 +10,36 @@ import { HttpService } from '../../../../services/http.service';
 })
 export class AddBookComponent implements OnInit {
 
-  constructor( private http :HttpService) { }
+  constructor(private http: HttpService) { }
   bookForm: FormGroup
-  user :any 
+  user: any
   imageData: string
+  regexSimple = /^.{50,1000}.*?\b/
+  status:any
 
   ngOnInit(): void {
     this.user = localStorage.getItem('user');
-    this.user =JSON.parse(this.user)
-    
+    this.user = JSON.parse(this.user)
+
     this.bookForm = new FormGroup({
-      "title": new FormControl(null),
-      "author": new FormControl(null),
+      "title": new FormControl(null, Validators.required),
+      "author": new FormControl(null, Validators.required),
       "bookCover": new FormControl(null),
-      "description": new FormControl(null),
+      "description": new FormControl(null, [Validators.required, Validators.pattern(this.regexSimple)]),
       "user": new FormControl(this.user._id),
-      "categorie" : new FormControl(null)
+      "categorie": new FormControl(null)
     })
+
+    // for ASYNCvalidati 
+    this.bookForm.valueChanges.subscribe( // this is for updating password input to compare it to password 2 on the confirmpassword validator 
+      (value: any) => {
+        this.status = this.bookForm.status === 'VALID' ? true : false // this is for updating disablied button 
+      }
+    );
   }
 
 
-  onchange(event:any){
+  onchange(event: any) {
     const file = (event.target as HTMLInputElement).files[0];
 
     this.bookForm.patchValue({ bookCover: file });
@@ -44,18 +53,16 @@ export class AddBookComponent implements OnInit {
       reader.readAsDataURL(file);
 
     }
-    
+
   }
 
-  OnSubmitBook(){
-    this.http.createBook(this.bookForm.value , this.bookForm.value.bookCover).subscribe(res=>{
+  OnSubmitBook() {
+    this.http.createBook(this.bookForm.value, this.bookForm.value.bookCover).subscribe(res => {
       console.log(res);
-      
-    },err =>{
+    }, err => {
       console.log(err);
-      
     })
-    
-  }  
+
+  }
 }
 
