@@ -1,6 +1,6 @@
 .card-body {
-    min-height: 300px;
-    min-width: 300px;
+    min-height: 350px;
+    min-width: 260PX;
     margin-right: 5px;
     max-width: 301px;
     max-height: 301px;
@@ -14,4 +14,8 @@
     border: 2px solid white;
     border-radius: 10px;
     padding: 2px;
+  }
+  .titles{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 40px;
   }

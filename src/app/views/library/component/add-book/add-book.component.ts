@@ -27,7 +27,7 @@ export class AddBookComponent implements OnInit {
     this.user = JSON.parse(this.user)
 
     this.bookForm = new FormGroup({
-      "title": new FormControl(null, Validators.required),
+      "title": new FormControl(null, [Validators.required]),
       "author": new FormControl(null, Validators.required),
       "bookCover": new FormControl(null),
       "description": new FormControl(null, [Validators.required, Validators.pattern(this.regexSimple)]),
