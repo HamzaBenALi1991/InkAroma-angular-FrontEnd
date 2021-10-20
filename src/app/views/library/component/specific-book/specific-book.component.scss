@@ -4,3 +4,46 @@
   padding: 20px;
   overflow: hidden;
 }
+.chevronlabel {
+  background-color: #0099C3;
+  max-width: 200px;
+  height: 52px;
+  display: inline-block;
+  color: #ffffff;
+  box-sizing: border-box;
+  font-family: Arial;
+  padding: 8px 30px 8px 12px;
+  position: relative;
+}
+
+.chevronlabel:before {
+  content: '';
+  position: absolute;
+  right: -13px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 26px solid transparent;
+  border-left: 13px solid #0099C3;
+  border-bottom: 26px solid transparent; 
+}
+
+.chevronlabel:after {
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 15px 15px 0 0;
+  content: '';
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  transform: rotate(-45deg);
+  vertical-align: top;
+  transform: rotate(45deg) skew(20deg, 20deg) translate(-50%);
+}
+
+textarea {
+  resize: none;
+}

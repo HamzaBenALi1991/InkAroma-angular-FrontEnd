@@ -1,8 +1,6 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-import { BookServiceService } from '../../../../services/book-service.service';
 import { HttpService } from '../../../../services/http.service';
 
 @Component({
@@ -14,7 +12,6 @@ export class SpecificBookComponent implements OnInit, OnDestroy {
   bookId: any
   book: any
   isloading = true
-  error = new Error()
   subscription: Subscription
 
 

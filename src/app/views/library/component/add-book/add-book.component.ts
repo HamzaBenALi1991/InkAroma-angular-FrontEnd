@@ -66,7 +66,8 @@ export class AddBookComponent implements OnInit {
     this.http.createBook(this.bookForm.value, this.bookForm.value.bookCover).subscribe(res => {
         this.toaster.pop("success" ,'Operaton succeeded ! ',"Book has been Added ." ); 
         this.isloading=false 
-        location.reload()
+        this.router.navigate(["library"])
+
     }, err => {
       if (err.error == 'This Book  already exist') {
         this.toaster.pop('error', "Operation Failed", "This book Already exist .")

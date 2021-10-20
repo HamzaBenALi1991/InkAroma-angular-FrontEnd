@@ -21,7 +21,9 @@
     <div class="col-sm-12">
       <h4>Description :</h4>
       <div>
-          <textarea  disabled rows="5" style="overflow: hidden;width: 100%;">{{ book.description }}</textarea>
+        <textarea  readonly disabled rows="5" style="overflow: hidden; width: 100%">{{
+          book.description
+        }}</textarea>
       </div>
     </div>
     <div class="col-sm-12">
@@ -29,6 +31,9 @@
         <i class="icon-star icons font-2xl mt-4"></i> Score :
         {{ book.BookScore }}
       </h4>
+    </div>
+    <div class="col-sm-12" style="margin-top: 50px;">
+      <a href="#" style="cursor: pointer;" > <div class="chevronlabel">Go See Reviews</div></a>
     </div>
   </div>
   <div class="col"></div>
