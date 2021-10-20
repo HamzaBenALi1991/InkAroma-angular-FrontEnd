@@ -1,7 +1,7 @@
 <div style="background-color: white; padding: 10%">
-  <h2>Add new Book</h2>
+  <h4>Add new Book</h4>
   <div *ngIf="isloading" class="lds-hourglass" ></div>
-  <form *ngIf="!isloading" [formGroup]="bookForm" (ngSubmit)="OnSubmitBook()">
+  <form class="addbookform" *ngIf="!isloading" [formGroup]="bookForm" (ngSubmit)="OnSubmitBook()">
     <!-- title -->
     <div class="form-group">
       <label style="margin-left: 10px" for="book">Book title*</label>

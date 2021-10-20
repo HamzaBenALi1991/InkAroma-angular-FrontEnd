@@ -1,6 +1,10 @@
-<div class="container-fluid py-2">
-  <div class="row justify-content-start">
-    <div class="col-sm-8 cool">
+<div class="container-fluid py-2" style="background-color: white">
+  <div class="row justify-content-center">
+    <div class="col-sm-12">
+      <router-outlet></router-outlet>
+
+    </div>
+    <div class="col-sm-12 cool">
       <button
         [routerLink]="['addBook']"
         routerLinkActive="router-link-active"
@@ -9,13 +13,13 @@
         Add a Book
       </button>
       <hr />
-      <h4  class="font-weight-light titles ml-2">All Titles :</h4>
-      <div 
+      <h4 class="font-weight-light titles ml-2">All Titles :</h4>
+      <div
         class="d-flex flex-row flex-nowrap"
         style="overflow-x: scroll; overflow-y: hidden"
       >
-        <div *ngFor="let book of books" class="card card-body">
-          <div class="card">
+        <div *ngFor="let book of books; let i =index"  class="card card-body">
+          <div class="card zoom">
             <div class="container" style="background-color: gainsboro">
               <h5 class="titles" style="text-align: center">
                 {{ book.title | titlecase }}
@@ -31,18 +35,57 @@
             />
 
             <div class="container" style="background-color: gainsboro">
-              <h6 class="titles pt-2" style="text-align: start;">
+              <h6 class="titles pt-2" style="text-align: start">
                 By :{{ book.author | titlecase }}
-              </h6>              
+              </h6>
             </div>
-            <button style="width: 100%;" class="btn btn-primary">Check Book</button>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Romantique :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of books" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
 
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
-      <router-outlet></router-outlet>
-    </div>
+
   </div>
 </div>
