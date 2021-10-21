@@ -122,8 +122,25 @@
           </div>
         </div>
 
-        <div class="row gutters-sm">
-          
+        <div *ngIf="books.length>0" class="row gutters-sm" style="background-color: white;width: 100%;margin: auto;" >
+          <table class="table table-striped"  style="width: 100%; margin: auto; border: 1px rgb(211, 204, 204) solid;">
+            <thead>
+              <tr>
+                <th scope="col">Number</th>
+                <th scope="col">Book</th>
+                <th scope="col">update</th>
+                <th scope="col">delete</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let item of books;let i=index" >
+              <tr>
+                <th scope="row">{{i+1}}</th>
+                <td>{{item.title}} </td>
+                <td><button [routerLink]="['/editBook/'+item_id]" routerLinkActive="router-link-active"  style="width: 100%;" class="btn btn-primary">Edit</button></td>
+                <td> <button (click)='ondelete(item._id)' style="width: 100%;" class="btn btn-danger">Delete</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

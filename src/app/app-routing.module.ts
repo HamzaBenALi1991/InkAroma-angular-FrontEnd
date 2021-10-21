@@ -135,6 +135,7 @@ export const routes: Routes = [
       { path: 'edit', loadChildren: () => import('./views/edit/edit.module').then(m => m.EditModule) },
       { path: 'library', loadChildren: () => import('./views/library/library.module').then(m => m.LibraryModule) },
       { path: 'Review/:idd', loadChildren: () => import('./views/bookreview/bookreview.module').then(m => m.BookreviewModule) },
+      { path: 'editBook/:id', loadChildren: () => import('./views/edit-book/edit-book.module').then(m => m.EditBookModule) },
     ]
   },
   { path: '**', component: P404Component }

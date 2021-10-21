@@ -40,7 +40,7 @@ export class HttpService {
   forget(data: any) {
     return this.http.put(`http://localhost:3000/forgetEmail`, data);
   }
-  // change password 
+  // change password  after forgetting 
   Resetpassword(data: any) {
     return this.http.put(`http://localhost:3000/resetpassword`, data)
   }
@@ -59,6 +59,7 @@ export class HttpService {
    return this.http.post("http://localhost:3000/newuser", profileData)
       
   }
+  // this is for update profile piture alone 
   addImage(file :FormData , id :any ){
     return this.http.put(`http://localhost:3000/upload/${id}`, file)
   }
@@ -69,13 +70,13 @@ export class HttpService {
   getAllBooks() {
     return this.http.get('http://localhost:3000/books')
   }
-  getOneBook(id: number) {
+  getOneBook(id: any) {
     return this.http.get(`http://localhost:3000/book/${id}`)
   }
   updateBook(id: any, body: any) {
     return this.http.put(`http://localhost:3000/book/${id}`, body)
   }
-  deleteBook(id: number) {
+  deleteBook(id: any) {
     return this.http.delete(`http://localhost:3000/book/${id}`)
   }
   createBook(name: any, image: any) {
@@ -86,11 +87,11 @@ export class HttpService {
     return this.http.post(`http://localhost:3000/newbook`, bookData)
   }
 
-  // affect review 
+  // affect review to be delete after confirmation 
   affectReview(idBook: any, idReview: any, body: any) {
     return this.http.put(`http://localhost:3000/affect-review/:idbook/:idreview/${idBook}/${idReview}`, body)
   }
-  // remove review 
+  // remove review to be delete after confirmation 
   removeReview(idBook: any, idReview: any, body: any) {
     return this.http.put(`http://localhost:3000/desaffect-review/:idbook/:idreview/${idBook}/${idReview}`, body)
   }
@@ -99,13 +100,13 @@ export class HttpService {
   getAllReviews() {
     return this.http.get('http://localhost:3000/reviews')
   }
-  getOneReview(id: number) {
+  getOneReview(id: any) {
     return this.http.get(`http://localhost:3000/review/${id}`)
   }
   updateReview(id: any, body: any) {
     return this.http.put(`http://localhost:3000/review/${id}`, body)
   }
-  deleteReview(id: number) {
+  deleteReview(id: any) {
     return this.http.delete(`http://localhost:3000/review/${id}`)
   }
   createReview(body: any) {

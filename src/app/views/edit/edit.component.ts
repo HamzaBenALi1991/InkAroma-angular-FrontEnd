@@ -87,8 +87,6 @@ export class EditComponent implements OnInit {
 
   // profile infos changes 
   onsubmit() {
-    console.log(this.editForm.value);
-
     this.http.updateUser(this.id, this.editForm.value).subscribe(res => {
       this.router.navigate(["/profile"])
       this.toaster.pop("success", this.user.pseudo + " Profile Page", " Has been Edited .")
