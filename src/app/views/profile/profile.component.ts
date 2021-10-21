@@ -29,9 +29,6 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
-  
-  
-
     // origin that works end here 
     this.id = localStorage.getItem('_Id')
     this.http.getOneUser(this.id).subscribe(res => {

@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { BookreviewRoutingModule } from './bookreview-routing.module';
 import { BookreviewComponent } from './bookreview.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    BookreviewComponent
+    BookreviewComponent,
+    
   ],
   imports: [
     CommonModule,
-    BookreviewRoutingModule
+    BookreviewRoutingModule,
+    ReactiveFormsModule,
+    
   ]
 })
 export class BookreviewModule { }

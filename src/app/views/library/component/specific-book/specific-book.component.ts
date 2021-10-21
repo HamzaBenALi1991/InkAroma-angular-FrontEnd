@@ -41,9 +41,7 @@ export class SpecificBookComponent implements OnInit, OnDestroy {
 
 
     );
-    setTimeout(() => {
-
-    }, 3000)
+  
 
   }
   ngOnDestroy() {
