@@ -9,13 +9,50 @@
         [src]="book.bookCover"
         alt=""
         width="100%"
-        height="400px"
+        height="250px"
       />
       <div class="col-sm-12" style="display: block; text-align: center">
         <h4>Author : {{ book.author | titlecase }}</h4>
       </div>
+      <hr>
+      <div class="col-sm-12" style="text-align: center;">
+          <h4>Change Book Cover </h4>
+        <ul>
+            <li
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+                flex-wrap
+              "
+            >
+              <input
+                (change)="onFileSelect($event)"
+                type="file"
+                class="form-control"
+                id="image"
+              />
+            </li>
+            <li
+              *ngIf="imageData"
+              class="
+                list-group-item
+                d-flex
+                justify-content-between
+                align-items-center
+                flex-wrap
+              "
+            >
+              <img [src]="imageData" alt=""  width="100%"/>
+            
+                <button (click)='onsaveImage()' class="btn btn-primary mb-3" style="width: 200%;text-align: center;" >Save Image</button>
+
+            </li>
+          </ul>
+      </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4" style="margin-top: 250px;">
       <div class="col-sm-12">
         <h4>Categorie : {{ book.categorie }}</h4>
       </div>

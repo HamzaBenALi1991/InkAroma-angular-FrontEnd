@@ -20,6 +20,8 @@ export class EditBookComponent implements OnInit {
   status = false
   editBookForm: FormGroup
   regexSimple = /^.{50,1000}.*?\b/
+  imageData : string
+  image :FormData
 
 
   ngOnInit(): void {
@@ -67,6 +69,36 @@ export class EditBookComponent implements OnInit {
     );
   }
 
+  onFileSelect(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.image = new FormData(); 
+    this.image.append("file" , file )
+    console.log(this.image);
+    console.log(file);
+    
+    
+    
+    const allowedMimeTypes = ["image/png", "image/jpeg", "image/jpg"];
+    if (file && allowedMimeTypes.includes(file.type)) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imageData = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+
+    }
+  }
+  onsaveImage(){
+    this.isloading=true 
+    this.http.addImagetobook(this.image ,this.bookId).subscribe(res=>{
+      console.log(res);
+      this.isloading= false
+      
+    },err=>{
+      console.log(err);
+      
+    })
+  }
 
   OnUpdateBook(){
   this.http.updateBook(this.bookId, this.editBookForm.value).subscribe(res=>{

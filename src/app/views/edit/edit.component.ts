@@ -123,8 +123,6 @@ export class EditComponent implements OnInit {
     const file = (event.target as HTMLInputElement).files[0];
     this.image = new FormData(); 
     this.image.append("file" , file )
-    console.log(this.image);
-    console.log(file);
     
     
     

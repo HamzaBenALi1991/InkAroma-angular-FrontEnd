@@ -63,6 +63,10 @@ export class HttpService {
   addImage(file :FormData , id :any ){
     return this.http.put(`http://localhost:3000/upload/${id}`, file)
   }
+  // this is for update bookcover
+  addImagetobook(file :FormData , id :any ){
+    return this.http.put(`http://localhost:3000/upload/book/${id}`, file)
+  }
 
 
   ///////////////////////////////////////////////////////////////////////////
