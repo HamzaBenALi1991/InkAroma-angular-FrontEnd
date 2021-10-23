@@ -27,6 +27,12 @@ export class DashboardComponent implements OnInit {
     }, err => {
       console.log(err);
 
+    },()=>{
+     for (let i = 0; i < this.books.length; i++) {
+      if (this.books[i].bookCover != "http://localhost:3000/uploads/books/generic.jpg") {
+        this.books[i].bookCover = "http://localhost:3000/uploads/books/" + this.books[i].bookCover
+      }       
+     }
     })
     // load users 
     this.http.getAllUsers().subscribe((res: []) => {
@@ -44,8 +50,10 @@ export class DashboardComponent implements OnInit {
       }
     })
     // load Reviews 
-    this.http.getAllUsers().subscribe((res: []) => {
+    this.http.getAllReviews().subscribe((res: []) => {
       this.reviews = res
+      console.log(this.reviews);
+      
     }, err => {
       console.log(err);
 
@@ -53,5 +61,47 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
       this.isloading=false
     }, 1000);
+  }
+
+
+
+  onDeleteUser(id:any){
+    const promt = prompt('Are you Sure ? ')
+    if (promt =='yes'||'Yes') {
+      this.http.deleteUser(id).subscribe(res=>{
+        console.log(res);
+        
+      },err=>{
+        console.log(err);
+        
+      }) 
+    }
+      
+  }
+  onDeleteBook(id:any){
+    const promt = prompt('Are you Sure ? ')
+    if (promt =='yes'||'Yes') {
+      this.http.deleteBook(id).subscribe(res=>{
+        console.log(res);
+        
+      },err=>{
+        console.log(err);
+        
+      }) 
+    }
+      
+  }
+  onDeleteReview(id:any){
+    const promt = prompt('Are you Sure ? ')
+    if (promt =='yes'||'Yes') {
+      this.http.deleteReview(id).subscribe(res=>{
+        console.log(res);
+        
+      },err=>{
+        console.log(err);
+        
+      }) 
+    }
+      
   }
 }

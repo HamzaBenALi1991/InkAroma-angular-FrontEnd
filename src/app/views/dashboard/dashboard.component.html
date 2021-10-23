@@ -1,7 +1,13 @@
 <div *ngIf="!isloading" class="animated fadeIn">
+  <div
+    *ngIf="isloading"
+    style="margin-left: 45%; margin-top: 35%"
+    class="lds-hourglass"
+  ></div>
+  <!-- users-->
   <div class="row justify-content-center">
     <button
-    *ngIf="!usersStatus"
+      *ngIf="!usersStatus"
       (click)="usersStatus = !usersStatus"
       style="width: 100%"
       type="button"
@@ -9,15 +15,18 @@
     >
       See All users
     </button>
-    <div class="col-sm-12" *ngIf="usersStatus" style="  line-height: 0.7;
-    "> 
-      <h6> {{users.length}} users .</h6>
-
+    <div class="col-sm-12" *ngIf="usersStatus" style="line-height: 0.7">
+      <h6>{{ users.length }} users .</h6>
       <div
-        *ngFor="let item of users"
+        *ngFor="
+          let item of users | paginate: { itemsPerPage: 5, currentPage: p }
+        "
         class="comment mt-4 text-justify float-left"
       >
-        <a [routerLink]="" routerLinkActive="router-link-active">
+        <a
+          [routerLink]="['/userProfile/' + item._id]"
+          routerLinkActive="router-link-active"
+        >
           <img
             [src]="item.image"
             alt=""
@@ -28,27 +37,157 @@
         </a>
         <h4>{{ item.pseudo }}</h4>
         <p style="text-align: end; float: right">{{ item.BookScore }}</p>
-        <span style="float: right;"> Infos and Statics</span>
+        <span style="float: right"> Infos and Statics</span>
         <hr />
         <p>Last time activity on : {{ item.updatedAt | date }}</p>
         <p>Number of Books Added : {{ item.addedbooks.length }} Books .</p>
-        <p>Number of Reviews : {{item.reviews.length}} Review. </p>
-        <span style="float: right"> created at : {{ item.createdAt | date }}</span>
-
+        <p>Number of Reviews : {{ item.reviews.length }} Review.</p>
+        <span style="float: right">
+          created at : {{ item.createdAt | date }}</span
+        >
+        <p>
+          <button (click)="onDeleteUser(item._id)" class="btn btn-danger">
+            Delete this User
+          </button>
+        </p>
       </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
     </div>
     <button
-    *ngIf="usersStatus"
-    (click)="usersStatus = !usersStatus"
-    style="width: 100%"
-    type="button"
-    class="btn btn-primary m-2"
-  > Hide Users </button>
-    
+      *ngIf="usersStatus"
+      (click)="usersStatus = !usersStatus"
+      style="width: 100%"
+      type="button"
+      class="btn btn-primary m-2"
+    >
+      Hide Users
+    </button>
+  </div>
+  <hr />
+  <!-- books-->
+
+  <div class="row justify-content-center">
+    <button
+      *ngIf="!booksStatus"
+      (click)="booksStatus = !booksStatus"
+      style="width: 100%"
+      type="button"
+      class="btn btn-primary"
+    >
+      See All Books
+    </button>
+    <div class="col-sm-12" *ngIf="booksStatus" style="line-height: 0.7">
+      <h6>{{ books.length }} books .</h6>
+      <div
+        *ngFor="
+          let item of books | paginate: { itemsPerPage: 5, currentPage: p }
+        "
+        class="comment mt-4 text-justify float-left"
+      >
+        <a
+          [routerLink]="['/library/Book/' + item._id]"
+          routerLinkActive="router-link-active"
+        >
+          <img
+            [src]="item.bookCover"
+            alt=""
+            class="rounded-circle"
+            width="40"
+            height="40"
+          />
+        </a>
+        <h4>{{ item.title }}</h4>
+        <span style="float: right"> Infos and Statics</span>
+        <hr />
+        <p>Last time accessed on : {{ item.updatedAt | date }}</p>
+        <p>Number of Reviews : {{ item.reviews.length }} Review.</p>
+        <span style="float: right">
+          created at : {{ item.createdAt | date }}</span
+        >
+        <p>
+          <button
+            [routerLink]="['/editBook/' + item._id]"
+            routerLinkActive="router-link-active"
+            class="btn btn-secondary"
+          >
+            Update this book
+          </button>
+          <button (click)="onDeleteBook(item._id)" class="btn btn-danger">
+            Delete this book
+          </button>
+        </p>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+    <button
+      *ngIf="booksStatus"
+      (click)="booksStatus = !booksStatus"
+      style="width: 100%"
+      type="button"
+      class="btn btn-primary m-2"
+    >
+      Hide Users
+    </button>
+  </div>
+  <hr />
+  <!-- Reviews-->
+  <div class="row justify-content-center">
+    <button
+      *ngIf="!reviewsStatus"
+      (click)="reviewsStatus = !reviewsStatus"
+      style="width: 100%"
+      type="button"
+      class="btn btn-primary"
+    >
+      See All Reviews
+    </button>
+    <div class="col-sm-12" *ngIf="reviewsStatus" style="line-height: 0.7">
+      <h6>{{ reviews.length }} Reviews .</h6>
+      <div
+        *ngFor="
+          let item of reviews | paginate: { itemsPerPage: 5, currentPage: p }
+        "
+        class="comment mt-4 text-justify float-left"
+      >
+        <a
+          [routerLink]="['/userProfile/' + item.user._id]"
+          routerLinkActive="router-link-active"
+        >
+          <h4>By {{ item.user.pseudo }}</h4></a
+        >
+        <span style="float: right"> Infos and Statics</span>
+        <hr />
+        <a
+          [routerLink]="['/library/Book/' + item.book._id]"
+          routerLinkActive="router-link-active"
+        >
+          <h4>Book : {{ item.book.title }}</h4></a
+        >
+
+        <h6>Score : {{ item.BookScore }} /5</h6>
+        <p>Review : {{ item.review }}</p>
+        <p>Last time accessed on : {{ item.updatedAt | date }}</p>
+        <span style="float: right">
+          created at : {{ item.createdAt | date }}</span
+        >
+        <p>
+          <button (click)="onDeleteReview(item._id)" class="btn btn-danger">
+            Delete this Review
+          </button>
+        </p>
+      </div>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+    <button
+      *ngIf="reviewsStatus"
+      (click)="reviewsStatus = !reviewsStatus"
+      style="width: 100%"
+      type="button"
+      class="btn btn-primary m-2"
+    >
+      Hide Reviews
+    </button>
   </div>
 </div>
-<div
-  *ngIf="isloading"
-  style="margin-left: 45%; margin-top: 35%"
-  class="lds-hourglass"
-></div>

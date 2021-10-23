@@ -7,6 +7,7 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -15,8 +16,11 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     ChartsModule,
     BsDropdownModule,
     ButtonsModule.forRoot(), 
-    CommonModule
+    CommonModule,
+    NgxPaginationModule
   ],
   declarations: [DashboardComponent]
 })
-export class DashboardModule { }
+export class DashboardModule {
+  p: number = 1;
+ }
