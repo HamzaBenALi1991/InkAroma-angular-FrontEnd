@@ -43,15 +43,13 @@ export class ProfileComponent implements OnInit {
       if (this.user.image != "http://localhost:3000/uploads/users/download.jpeg") {
         this.user.image = "http://localhost:3000/uploads/users/" + this.user.image
       }
+      
+    if (this.user.addedbooks.length>0) {
       for (let i = 0; i < this.user.addedbooks.length; i++) {
-        this.http.getOneBook(this.user.addedbooks[i]).subscribe(res => {
-          this.books.push(res);
-
-        }, err => {
-          console.log(err);
-
-        })
+          this.books.push(this.user.addedbooks[i]);
+  
       }
+    }
       this.age = this.profileService.ageCalculated(this.user.age)
 
       this.isloading = false

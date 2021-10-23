@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -104,8 +103,10 @@ export class BookreviewComponent implements OnInit, OnDestroy {
           } else {
             this.book.BookScore = this.book.BookScore + '/ 5'
           }
-          this.isloading = false;
+          setTimeout(() => {
+            this.isloading = false;
 
+          }, 1000);
 
 
 
