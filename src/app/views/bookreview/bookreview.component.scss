@@ -4,6 +4,7 @@ textarea {
 .form{
   border: 1px solid rgb(199, 194, 194) ;
   border-radius: 4px;
+  padding: 20px
 }
 .overall{
 padding: 20px;
@@ -111,17 +112,17 @@ h1, h2, h3 {
 
 h1 {
   font-size: 2.4em;
-  background-color: rgba(41, 41, 41, 1);
+  background-color: rgb(235, 228, 228);
   text-align: center;
   padding: 20px;
   margin: 0;
-  color: #fff;
+  color: rgb(17, 16, 16);
   
   a {
     display: block;
     margin-top: 10px;
     text-transform: none;
-    color: #aaa;
+    color: rgb(247, 239, 239);
     font-size: 16px;
     text-decoration: none;
   }
@@ -130,3 +131,131 @@ h1 {
 .demo {
   padding: 40px;
 }
+////
+.navbar-nav {
+  width: 100%
+}
+
+@media(min-width:568px) {
+  .end {
+      margin-left: auto
+  }
+}
+
+@media(max-width:768px) {
+  #post {
+      width: 100%
+  }
+}
+
+#clicked {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  text-align: center;
+  width: 100%;
+  background-color: #ecb21f;
+  border-color: #a88734 #9c7e31 #846a29;
+  color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 13px
+}
+
+#profile {
+  background-color: unset
+}
+
+#post {
+  margin: 10px;
+  padding: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-align: center;
+  background-color: #ecb21f;
+  border-color: #a88734 #9c7e31 #846a29;
+  color: black;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 13px;
+  width: 50%
+}
+
+body {
+  background-color: rgb(216, 211, 211)
+}
+
+#nav-items li a,
+#profile {
+  text-decoration: none;
+  color: rgb(224, 219, 219);
+  background-color: rgb(219, 209, 209)
+}
+
+.comments {
+  margin-top: 5%;
+  margin-left: 20px
+}
+
+.darker {
+  border: 1px solid #ecb21f;
+  background-color: rgb(160, 159, 159);
+  float: right;
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px
+}
+
+.comment {
+  border: 1px solid rgb(167, 170, 170);
+  background-color: rgba(200, 238, 238, 0.973);
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.comment h4,
+.comment span,
+.darker h4,
+.darker span {
+  display: inline
+}
+
+.comment p,
+.comment span {
+  color: rgb(22, 21, 21)
+}
+
+
+
+label {
+  color: rgb(37, 36, 36)
+}
+
+#align-form {
+  margin-top: 20px
+}
+
+.form-group p a {
+  color: white
+}
+
+
+
+#img {
+  margin-right: 15px;
+  position: static
+}
+
+.form-group input,
+.form-group textarea,
+.textareaa {
+  background-color: rgb(247, 240, 240);
+  border: 1px solid rgb(212, 219, 219);
+  border-radius: 6px
+}
+
+
+

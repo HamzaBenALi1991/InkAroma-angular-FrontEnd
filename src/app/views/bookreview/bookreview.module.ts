@@ -6,6 +6,8 @@ import { BookreviewComponent } from './bookreview.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
+
+
 @NgModule({
   declarations: [
     BookreviewComponent,
@@ -17,5 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     
   ]
+  ,
 })
 export class BookreviewModule { }
