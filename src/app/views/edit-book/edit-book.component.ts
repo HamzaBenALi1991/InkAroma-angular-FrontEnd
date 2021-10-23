@@ -63,6 +63,9 @@ export class EditBookComponent implements OnInit {
 
         })
 
+      },err=>{
+        console.log(err);
+        
       }
 
 

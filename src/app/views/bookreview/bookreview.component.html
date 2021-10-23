@@ -260,14 +260,17 @@
         *ngFor="let item of reviews"
         class="comment mt-4 text-justify float-left"
       >
+       <a [routerLink]="['/userProfile/'+item.user._id]" routerLinkActive="router-link-active" >
         <img
-          *ngIf="reviews.length ==book.reviews.length"
-          [src]="item.user.image"
-          alt=""
-          class="rounded-circle"
-          width="40"
-          height="40"
-        />
+        
+        *ngIf="reviews.length ==book.reviews.length"
+        [src]="item.user.image"
+        alt=""
+        class="rounded-circle"
+        width="40"
+        height="40"
+      />
+       </a> 
         <h4>{{ item.user.pseudo }}</h4>
         <p style="text-align: end; float: right">{{ item.BookScore }} / 5</p>
         <br />

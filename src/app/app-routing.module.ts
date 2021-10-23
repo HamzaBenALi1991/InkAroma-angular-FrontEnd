@@ -136,6 +136,7 @@ export const routes: Routes = [
       { path: 'library', loadChildren: () => import('./views/library/library.module').then(m => m.LibraryModule) },
       { path: 'Review/:idd', loadChildren: () => import('./views/bookreview/bookreview.module').then(m => m.BookreviewModule) },
       { path: 'editBook/:id', loadChildren: () => import('./views/edit-book/edit-book.module').then(m => m.EditBookModule) },
+      { path: 'userProfile/:id', loadChildren: () => import('./views/prfile-for-others/prfile-for-others.module').then(m => m.PrfileForOthersModule) },
     ]
   },
   { path: '**', component: P404Component }
