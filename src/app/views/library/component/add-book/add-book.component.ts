@@ -63,9 +63,10 @@ export class AddBookComponent implements OnInit {
   OnSubmitBook() {
     this.isloading=true 
     this.http.createBook(this.bookForm.value, this.bookForm.value.bookCover).subscribe(res => {
+      let id:any =res 
         this.toaster.pop("success" ,'Operaton succeeded ! ',"Book has been Added ." ); 
         this.isloading=false 
-        this.router.navigate(["library"])
+        this.router.navigate(["library/Book/"+id._id])
 
     }, err => {
       if (err.error == 'This Book  already exist') {
@@ -75,6 +76,7 @@ export class AddBookComponent implements OnInit {
         this.toaster.pop('error', "Operation Failed", "Try and Change the Image Format or the size of the Image." )
         this.toaster.pop('error', "Operation Failed", err.error)
         location.reload()
+        this.isloading = false 
 
 
       }
