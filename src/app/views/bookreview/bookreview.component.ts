@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
 import { Subscription } from 'rxjs';
 import { HttpService } from '../../services/http.service';
 
@@ -25,7 +26,9 @@ export class BookreviewComponent implements OnInit, OnDestroy {
   reviewedScore :any
   reviwedId:any
 
-  constructor(private route: ActivatedRoute, private http: HttpService) { }
+  constructor(private route: ActivatedRoute,
+     private http: HttpService , 
+     private toaster :ToasterService) { }
 
   ngOnInit(): void {
     this.isloading = true
@@ -104,30 +107,22 @@ export class BookreviewComponent implements OnInit, OnDestroy {
             this.book.BookScore = this.book.BookScore + '/ 5'
           }
           setTimeout(() => {
-            this.isloading = false;
-            console.log(this.reviews);
-            
+            this.isloading = false;            
           }, 1000);
-
-
-
-
-
         })
 
       }
-
-
     );
   }
 
   OnSubmit() {
     this.http.createReview(this.reviewform.value).subscribe(res => {
-      console.log(res);
-
+      this.toaster.pop('success','Review submitted' ,'Successfully !! ') ; 
+      location.reload()
     }, err => {
       console.log(err);
-
+      this.toaster.pop('error','Inernal Servor Problem' ,' Task has failed ') ;
+      this.toaster.pop('error','Inernal Servor Problem' , err.error) ; 
     })
 
   }
@@ -144,10 +139,16 @@ export class BookreviewComponent implements OnInit, OnDestroy {
 
   ondeleteRev(Id : any ){
     this.http.deleteReview(Id).subscribe(res=>{
-      console.log(res);
-      
+      this.toaster.pop('success','Review Deleted' ,'Successfully !! ') ; 
+      location.reload()
     },err=>{
       console.log(err);
+      this.toaster.pop('error','Inernal Servor Problem' ,' Task has failed ') ;
+      this.toaster.pop('error','Inernal Servor Problem' , err.error) ; 
+
+
+
+    
       
     })
   }

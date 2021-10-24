@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToasterService } from 'angular2-toaster';
 import { Subscription } from 'rxjs';
 import { HttpService } from '../../services/http.service';
 
@@ -9,10 +10,12 @@ import { HttpService } from '../../services/http.service';
   templateUrl: './edit-book.component.html',
   styleUrls: ['./edit-book.component.css']
 })
-export class EditBookComponent implements OnInit {
+export class EditBookComponent implements OnInit, OnDestroy {
 
   constructor(private http: HttpService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute , 
+    private toaster :ToasterService,
+    private router :Router) { }
   book: any
   subscription: Subscription
   isloading = true
@@ -94,22 +97,30 @@ export class EditBookComponent implements OnInit {
   onsaveImage(){
     this.isloading=true 
     this.http.addImagetobook(this.image ,this.bookId).subscribe(res=>{
-      console.log(res);
-      this.isloading= false
-      
+      this.toaster.pop('success',this.book.title +' Cover' ,'has been Updated ');
+      this.router.navigate(['/library/Book/'+this.bookId])
     },err=>{
       console.log(err);
+      this.toaster.pop('error',this.book.title +'Cover' ,'failer to update ');
+      this.toaster.pop('error','Servor problem' ,err.error.message );
+
+
       
     })
   }
 
   OnUpdateBook(){
   this.http.updateBook(this.bookId, this.editBookForm.value).subscribe(res=>{
-    console.log(res);
-    
+    this.toaster.pop('success',this.book.title  ,'has been Updated ');
+    this.router.navigate(['/library/Book/'+this.bookId])
   },err=>{
     console.log(err);
-    
+    this.toaster.pop('error',this.book.title ,'failer to update ');
+    this.toaster.pop('error','Servor problem' ,err.error.message );    
   })
   }
+  ngOnDestroy(){
+    this.subscription.unsubscribe()
+  }
+  
 }

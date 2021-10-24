@@ -47,8 +47,22 @@
                       !this.SignUpForm.get('pseudo').valid &&
                       this.SignUpForm.get('pseudo').touched
                     "
-                  >
-                    This feild is required.
+                  > <span
+                  *ngIf="
+                    this.SignUpForm.get('pseudo').errors['required'] &&
+                    this.SignUpForm.get('pseudo').touched
+                  "
+                >
+                  This feild is required .
+                </span>
+                <span
+                  *ngIf="
+                    this.SignUpForm.get('pseudo').errors['pattern'] &&
+                    this.SignUpForm.get('pseudo').touched
+                  "
+                >
+                  Pseudo with spaces at first are not Allowed . and should have 2 to 20 characters
+                </span>
                   </small>
                 </div>
 

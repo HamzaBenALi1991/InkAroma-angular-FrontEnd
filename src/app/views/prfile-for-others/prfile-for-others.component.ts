@@ -8,7 +8,7 @@ import { HttpService } from '../../services/http.service';
   templateUrl: './prfile-for-others.component.html',
   styleUrls: ['./prfile-for-others.component.css']
 })
-export class PrfileForOthersComponent implements OnInit ,OnDestroy{
+export class PrfileForOthersComponent implements OnInit, OnDestroy {
   isloading = true;
   user: any
   userId: any
@@ -18,35 +18,30 @@ export class PrfileForOthersComponent implements OnInit ,OnDestroy{
   constructor(private route: ActivatedRoute, private http: HttpService) { }
 
   ngOnInit(): void {
-
     this.isloading = true;
     this.subcription = this.route.params.subscribe((params: Params) => {
       this.userId = params['id'];
 
       this.http.getOneUser(this.userId).subscribe(res => {
-        this.user = res        
+        this.user = res
       }, err => {
         console.log(err);
       }, () => {
-        console.log(this.user);
         if (this.user.image != "http://localhost:3000/uploads/users/download.jpeg") {
           this.user.image = "http://localhost:3000/uploads/users/" + this.user.image
         }
         for (let i = 0; i < this.user.addedbooks.length; i++) {
           this.books.push(this.user.addedbooks[i])
-          console.log(this.books);
-          
         }
-        this.isloading=false 
-       })
+        this.isloading = false
+      })
 
     }, err => {
       console.log(err);
-
     })
 
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subcription.unsubscribe()
   }
 }

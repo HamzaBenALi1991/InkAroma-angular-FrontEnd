@@ -26,7 +26,8 @@ export class RegisterComponent implements OnInit {
   imageData: string
   regexPhone = /^[0-9]{5,10}$/
   regexEmail = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/
-  regexname = /^[A-Za-z][a-zA-Z]+$/
+  regexname = /^[a-zA-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$/
+  regexPseudo=/^(?!\s)[a-zA-Z0-9_\s-]{2,20}$/
 
 
 
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
     // reactive form set up 
     this.SignUpForm = new FormGroup({
-      "pseudo": new FormControl(null, Validators.required),
+      "pseudo": new FormControl(null,[ Validators.required,Validators.pattern(this.regexPseudo)]),
       "email": new FormControl(null, [Validators.required, Validators.pattern(this.regexEmail)]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)]),
       "password2": new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),

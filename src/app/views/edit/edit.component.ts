@@ -106,6 +106,10 @@ export class EditComponent implements OnInit {
       this.toggle = !this.toggle
     }, err => {
       console.log(err.error.message);
+      this.toaster.pop("warning", "Servor Problem  !!!", err.error.message);
+      this.toaster.pop("error", "Servor Problem  !!!", 'Failed to update ');
+
+
 
     })
   }
@@ -136,19 +140,23 @@ export class EditComponent implements OnInit {
 
     }
   }
+  // on change user image 
   onsaveImage(){
     this.isloading=true 
     this.http.addImage(this.image ,this.id).subscribe(res=>{
-      console.log(res);
+      this.toaster.pop('success' , this.user.pseudo +' Profile Image ','Has been updated .')
       this.router.navigate(['/profile'])
       
     },err=>{
       console.log(err);
-      
+      this.toaster.pop('warning' , this.user.pseudo +' Profile Image ','failed to updated .') 
+      this.toaster.pop('warning' ,  'failed to updated ' ,'Inernal Servor Problem') 
+
     })
   }
+  // delete account 
   onDelete(){
-    let person = prompt("Are you Sure you want to delete your account ?", "If Yes ,Write your Email if Yes");
+    let person = prompt("Are you Sure you want to delete your account ?", "If Yes ,Write your Email ");
     if (person == this.user.email) {      
       this.http.deleteUser(this.user._id).subscribe(res=>{
         this.toaster.pop('warning' , "GoodBye"+ this.user.pseudo , "your account has been Deleted .");
