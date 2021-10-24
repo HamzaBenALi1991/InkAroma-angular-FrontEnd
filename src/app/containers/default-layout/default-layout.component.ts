@@ -57,7 +57,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
         this.user.image = "http://localhost:3000/uploads/users/" + this.user.image
       }
       this.isloading=false 
-      }, 500);
+      }, 700);
       
       
   }

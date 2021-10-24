@@ -52,7 +52,6 @@ export class DashboardComponent implements OnInit {
     // load Reviews 
     this.http.getAllReviews().subscribe((res: []) => {
       this.reviews = res
-      console.log(this.reviews);
       
     }, err => {
       console.log(err);

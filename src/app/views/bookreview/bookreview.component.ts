@@ -93,7 +93,7 @@ export class BookreviewComponent implements OnInit, OnDestroy {
               }
             })
           }
-          // extract Book review 
+          // extract Book reviewSCORE
           this.book.BookScore = this.totalscore / this.book.reviews.length
           // one decimal after the , 
           this.book.BookScore = (Math.round(this.book.BookScore * 10) / 10).toFixed(1);
@@ -105,7 +105,8 @@ export class BookreviewComponent implements OnInit, OnDestroy {
           }
           setTimeout(() => {
             this.isloading = false;
-
+            console.log(this.reviews);
+            
           }, 1000);
 
 

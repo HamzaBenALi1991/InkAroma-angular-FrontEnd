@@ -13,12 +13,13 @@
         Add a Book
       </button>
       <hr />
-      <h4 class="font-weight-light titles ml-2">All Titles :</h4>
+      <h4 class="font-weight-light titles ml-2">Today's Recommandation  :</h4>
       <div
         class="d-flex flex-row flex-nowrap"
         style="overflow-x: scroll; overflow-y: hidden"
       >
-        <div *ngFor="let book of books; let i =index"  class="card card-body">
+      <!-- ngfor-->
+        <div *ngFor="let book of sampleodtoday; let i =index"  class="card card-body">
           <div class="card zoom">
             <div class="container" style="background-color: gainsboro">
               <h5 class="titles" style="text-align: center">
@@ -51,7 +52,7 @@
         class="d-flex flex-row flex-nowrap"
         style="overflow-x: scroll; overflow-y: hidden"
       >
-        <div *ngFor="let book of books" class="card card-body">
+        <div *ngFor="let book of romantic" class="card card-body">
           <div class="card zoom">
             <div class="container" style="background-color: gainsboro">
               <h5
@@ -79,7 +80,247 @@
                 By :{{ book.author | titlecase }}
               </h6>
             </div>
-            <button style="width: 100%" class="btn btn-primary">
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Detective :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of detective" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
+
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Horror :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of horror" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
+
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Fantasy :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of fantasy" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
+
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Drama :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of drama" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
+
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Sc-FI :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of scfi" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
+
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
+              Check Book
+            </button>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <h4 class="font-weight-light titles ml-2">Others :</h4>
+      <div
+        class="d-flex flex-row flex-nowrap"
+        style="overflow-x: scroll; overflow-y: hidden"
+      >
+        <div *ngFor="let book of others" class="card card-body">
+          <div class="card zoom">
+            <div class="container" style="background-color: gainsboro">
+              <h5
+                class="titles"
+                style="
+                  text-align: center;
+                  border-top-left-radius: 10px;
+                  border-top-right-radius: 10px;
+                "
+              >
+                {{ book.title | titlecase }}
+              </h5>
+            </div>
+            <div *ngIf="isloading" class="lds-hourglass"></div>
+            <img
+              *ngIf="!isloading"
+              [src]="book.bookCover"
+              alt="BookCover"
+              width="100%"
+              height="180px"
+            />
+
+            <div class="container" style="background-color: gainsboro">
+              <h6 class="titles pt-2" style="text-align: start">
+                By :{{ book.author | titlecase }}
+              </h6>
+            </div>
+            <button (click)='checkBook(book._id)' style="width: 100%" class="btn btn-primary">
               Check Book
             </button>
           </div>

@@ -31,7 +31,7 @@ export class AddBookComponent implements OnInit {
       "bookCover": new FormControl(null),
       "description": new FormControl(null, [Validators.required, Validators.pattern(this.regexSimple)]),
       "user": new FormControl(this.user._id),
-      "categorie": new FormControl(null)
+      "categorie": new FormControl(null,Validators.required)
     })
 
     // for ASYNCvalidati 
