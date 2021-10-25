@@ -30,6 +30,7 @@ export class AuthGuardGuard implements CanActivate {
   }
   tokenexpiraton(token: any): boolean {
     const decoded:any=jwt_decode(token);
+    
     return Math.floor(new Date().getTime()/1000)>=decoded
     
   }

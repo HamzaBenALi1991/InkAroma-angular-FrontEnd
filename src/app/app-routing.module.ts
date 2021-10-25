@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminGuard } from './admin.guard';
 import { AuthGuardGuard } from './auth-guard.guard';
 
 // Import Containers
@@ -88,7 +89,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
       },
       {
-        path: 'dashboard',
+        path: 'dashboard' ,canActivate : [AdminGuard],
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
