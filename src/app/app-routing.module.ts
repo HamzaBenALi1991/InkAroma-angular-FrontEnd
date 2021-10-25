@@ -138,6 +138,13 @@ export const routes: Routes = [
       { path: 'Review/:idd', loadChildren: () => import('./views/bookreview/bookreview.module').then(m => m.BookreviewModule) },
       { path: 'editBook/:id', loadChildren: () => import('./views/edit-book/edit-book.module').then(m => m.EditBookModule) },
       { path: 'userProfile/:id', loadChildren: () => import('./views/prfile-for-others/prfile-for-others.module').then(m => m.PrfileForOthersModule) },
+      { path: 'library/romance', loadChildren: () => import('./views/categories/romance/romance.module').then(m => m.RomanceModule) },
+      { path: 'library/detective', loadChildren: () => import('./views/categories/detective/detective.module').then(m => m.DetectiveModule) },
+      { path: 'library/fantasy', loadChildren: () => import('./views/categories/fantasy/fantasy.module').then(m => m.FantasyModule) },
+      { path: 'library/Horror', loadChildren: () => import('./views/categories/horror/horror.module').then(m => m.HorrorModule) },
+      { path: 'library/sc-fi', loadChildren: () => import('./views/categories/sc-fi/sc-fi.module').then(m => m.ScFiModule) },
+      { path: 'library/Drama', loadChildren: () => import('./views/categories/drama/drama.module').then(m => m.DramaModule) },
+      { path: 'library/Others', loadChildren: () => import('./views/categories/others/others.module').then(m => m.OthersModule) },
     ]
   },
   { path: '**', component: P404Component }
