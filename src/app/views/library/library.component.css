@@ -1,0 +1,33 @@
+.card-body {
+  min-height: 350px;
+  min-width: 260px;
+  margin-right: 5px;
+  max-width: 301px;
+  max-height: 301px;
+}
+::-webkit-scrollbar {
+  display: none;
+  color: red;
+}
+
+.cool {
+  border: 2px solid rgb(199, 195, 195);
+  border-radius: 10px;
+  padding: 2px;
+}
+.titles {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  height: 40px;
+}
+/* try */
+.zoom {
+  transition: transform 0.2s;
+  transition-timing-function: ease-in ease-out ease-in;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
+}

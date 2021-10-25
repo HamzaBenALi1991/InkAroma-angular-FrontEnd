@@ -1,0 +1,379 @@
+<div class="container">
+  <div
+    *ngIf="isloading"
+    class="lds-hourglass"
+    style="margin-top: 30%; margin-left: 50%"
+  ></div>
+  <div class="main-body" *ngIf="!isloading">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img
+                [src]="user.image"
+                alt="Admin"
+                class="rounded-circle p-1 bg-primary"
+                width="110"
+              />
+              <div class="mt-3">
+                <h4>{{ user.pseudo | titlecase }}</h4>
+                <h6>{{ age }}</h6>
+                <p class="text-muted font-size-sm">From: {{ user.country }}</p>
+                <!-- <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button> -->
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li
+                class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                  flex-wrap
+                "
+              >
+                <input
+                  (change)="onFileSelect($event)"
+                  type="file"
+                  class="form-control"
+                  id="image"
+                />
+              </li>
+              <li
+                *ngIf="imageData"
+                class="
+                  list-group-item
+                  d-flex
+                  justify-content-between
+                  align-items-center
+                  flex-wrap
+                "
+              >
+                <img [src]="imageData" alt=""  width="200px"/>
+                <div>
+                  <button (click)='onsaveImage()' class="btn btn-primary mb-3" style="width: 200px;text-align: center;" >Save Image</button>
+
+                </div>
+              </li>
+              <!-- <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe me-2 icon-inline"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>Website</h6>
+                                <span class="text-secondary">https://bootdey.com</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github me-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter me-2 icon-inline text-info"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>Twitter</h6>
+                                <span class="text-secondary">@bootdey</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram me-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>Instagram</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook me-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>Facebook</h6>
+                                <span class="text-secondary">bootdey</span>
+                            </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h4>Edit Personel Information</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="editForm" (ngSubmit)="onsubmit()">
+              <!-- Pseudo input -->
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="pseudo">Pseudo</label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input
+                    id="pseudo"
+                    type="text"
+                    class="form-control"
+                    value="{{ user.pseudo | titlecase }}"
+                    formControlName="pseudo"
+                  />
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.editForm.get('pseudo').valid &&
+                      this.editForm.get('pseudo').touched
+                    "
+                  >
+                    This feild is required.
+                  </small>
+                </div>
+              </div>
+              <!-- firstname input -->
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="firstname">Firstname</label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input
+                    id="firstname"
+                    type="text"
+                    class="form-control"
+                    value="{{ user.firstname | titlecase }}"
+                    formControlName="firstname"
+                  />
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.editForm.get('firstname').valid &&
+                      this.editForm.get('firstname').touched
+                    "
+                  >
+                    This feild is required.
+                  </small>
+                </div>
+              </div>
+              <!-- lastname input -->
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="lastname">Lastname </label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input
+                    id="lastname"
+                    type="text"
+                    class="form-control"
+                    value="{{ user.lastname }}"
+                    formControlName="lastname"
+                  />
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.editForm.get('lastname').valid &&
+                      this.editForm.get('lastname').touched
+                    "
+                  >
+                    This feild is required.
+                  </small>
+                </div>
+              </div>
+              <!-- email  input -->
+
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="email">Email </label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input
+                    type="text"
+                    class="form-control"
+                    value="{{ user.email }}"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+              <!-- phone  input -->
+
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="phone"> Mobile </label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input
+                    type="tel"
+                    id="phone"
+                    class="form-control"
+                    value="{{ user.phone }}"
+                    formControlName="phone"
+                  />
+                </div>
+              </div>
+              <!-- country input -->
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="country">Country</label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <select
+                    formControlName="country"
+                    class="form-control"
+                    name="country"
+                    id="country"
+                    autocomplete="off"
+                  >
+                    <option value="" disabled selected>
+                      --Select Country--
+                    </option>
+                    <option
+                      *ngFor="let country of countries"
+                      [value]="country.name"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <!-- date of birth -->
+              <div class="row mb-3 input-group form-group">
+                <div class="col-sm-3">
+                  <label for="age">Date of birth </label>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <input
+                    type="date"
+                    formControlName="age"
+                    id="age"
+                    class="form-control"
+                    value="{{ user.age }}"
+                  />
+                </div>
+              </div>
+              <hr />
+              <!-- button -->
+              <div class="row input-group form-group justify-content-between">
+                <div class="col-sm-3 text-secondary">
+                  <input
+                    type="submit"
+                    class="btn btn-primary px-4"
+                    value="Save Changes"
+                    [disabled]="
+                      !this.editForm.valid &&
+                      !this.editForm.get('country').valid
+                    "
+                  />
+                </div>
+                <div class="col-sm-3 text-secondary">
+                  <input
+                    type="button"
+                    class="btn btn-danger px-4"
+                    value="Cancel"
+                    [routerLink]="['/profile']"
+                    routerLinkActive="router-link-active"
+                    (click)="onDiscard()"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- here paswword-->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header" *ngIf="!toggle">
+                <button
+                  (click)="toggle = !toggle"
+                  style="min-width: 100%"
+                  class="btn btn-primary"
+                >
+                  Click to Edit password
+                </button>
+              </div>
+              <form [formGroup]="editpass" (ngSubmit)="onsubmitpass()">
+                <div class="card-body" *ngIf="toggle">
+                  <div class="form-group">
+                    <label for="password">New Password : </label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name=""
+                      id="password"
+                      formControlName="password"
+                    />
+                    <small
+                      class="errormessage"
+                      *ngIf="
+                        !this.editpass.get('password').valid &&
+                        this.editpass.get('password').touched
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          this.editpass.get('password').errors['required'] &&
+                          this.editpass.get('password').touched
+                        "
+                      >
+                        This feild is required
+                      </span>
+                      <span
+                        *ngIf="
+                          this.editpass.get('password').errors['minlength'] &&
+                          this.editpass.get('password').touched
+                        "
+                      >
+                        The password must have at least 6 character.
+                      </span>
+                    </small>
+                  </div>
+                  <!-- confirm password -->
+                  <div class="form-group">
+                    <label for="password2">Confirme New Password : </label>
+                    <input
+                      class="form-control"
+                      type="password"
+                      name=""
+                      id="password2"
+                      formControlName="password2"
+                    />
+                    <small
+                      class="errormessage"
+                      *ngIf="
+                        !this.editpass.get('password2').valid &&
+                        this.editpass.get('password2').touched
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          this.editpass.get('password2').errors['required'] &&
+                          this.editpass.get('password2').touched
+                        "
+                      >
+                        This feild is required .
+                      </span>
+                      <span
+                        *ngIf="
+                          this.editpass.get('password2').errors['NoMatch'] &&
+                          this.editpass.get('password2').touched &&
+                          this.editpass.controls.password2.value !== null
+                        "
+                      >
+                        The password does not match .
+                      </span>
+                    </small>
+                  </div>
+                </div>
+                <div class="card-footer" *ngIf="toggle">
+                  <button
+                    [disabled]="!this.editpass.valid"
+                    type="submit"
+                    class="btn btn-primary"
+                  >
+                    save
+                  </button>
+
+                  <button
+                    (click)="toggle = !toggle"
+                    type="button"
+                    class="btn btn-danger"
+                  >
+                    cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-conent-center">
+      <div class="col-sm-12">
+        <button  (click)='onDelete()' style="width: 100%; margin-top: 75px;" type="button" class="btn btn-danger" >
+          Delete Account 
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

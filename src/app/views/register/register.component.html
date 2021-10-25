@@ -2,52 +2,372 @@
   <main class="main d-flex align-items-center">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="col-md-8 mx-auto">
           <div class="card mx-4">
+            <div class="card-header p-4 bg-primary">
+              <img
+                src="https://see.fontimg.com/api/renderfont4/dJnR/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SW5rLUFyb21h/merry-christmas-star.png"
+                style="max-height: 45px; margin-left: 33%"
+                alt=""
+              />
+            </div>
             <div class="card-body p-4">
-              <form>
+              <!-- creative form  for user registration -->
+              <div
+                *ngIf="isloading"
+                style="margin-left: 40%"
+                class="lds-hourglass"
+              ></div>
+              <form
+                *ngIf="!isloading"
+                [formGroup]="SignUpForm"
+                (ngSubmit)="onsubmit()"
+              >
                 <h1>Register</h1>
+
                 <p class="text-muted">Create your account</p>
-                <div class="input-group mb-3">
+                <!-- pseudo input -->
+                <div class="input-group mb-2 form-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-user"></i></span>
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
+                  <input
+                    style="min-width: 85%"
+                    type="text"
+                    class="form-control"
+                    placeholder="pseudo"
+                    formControlName="pseudo"
+                  />
+                  <!-- pseudo error messages-->
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.SignUpForm.get('pseudo').valid &&
+                      this.SignUpForm.get('pseudo').touched
+                    "
+                  > <span
+                  *ngIf="
+                    this.SignUpForm.get('pseudo').errors['required'] &&
+                    this.SignUpForm.get('pseudo').touched
+                  "
+                >
+                  This feild is required .
+                </span>
+                <span
+                  *ngIf="
+                    this.SignUpForm.get('pseudo').errors['pattern'] &&
+                    this.SignUpForm.get('pseudo').touched
+                  "
+                >
+                  Pseudo with spaces at first are not Allowed . and should have 2 to 20 characters
+                </span>
+                  </small>
                 </div>
-                <div class="input-group mb-3">
+
+                <!--email input -->
+                <div class="input-group mb-2 form-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">@</span>
                   </div>
-                  <input type="text" class="form-control" placeholder="Email" autocomplete="email" required>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Email"
+                    formControlName="email"
+                    style="min-width: 85%"
+                  />
+                  <!-- email error handlying -->
+
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.SignUpForm.get('email').valid &&
+                      this.SignUpForm.get('email').touched
+                    "
+                  >
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('email').errors['required'] &&
+                        this.SignUpForm.get('email').touched
+                      "
+                    >
+                      This feild is required .
+                    </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('email').errors['pattern'] &&
+                        this.SignUpForm.get('email').touched
+                      "
+                    >
+                      This Email adresse format is incorrect .
+                    </span>
+                  </small>
                 </div>
-                <div class="input-group mb-3">
+
+                <!-- in case email already exist -->
+                <span class="thisiswrong">This email already exist . </span>
+                <!--password input -->
+
+                <div class="input-group mb-2 form-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Password" autocomplete="new-password" required>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    formControlName="password"
+                    style="min-width: 85%"
+                  />
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.SignUpForm.get('password').valid &&
+                      this.SignUpForm.get('password').touched
+                    "
+                  >
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('password').errors['required'] &&
+                        this.SignUpForm.get('password').touched
+                      "
+                    >
+                      This feild is required
+                    </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('password').errors['minlength'] &&
+                        this.SignUpForm.get('password').touched
+                      "
+                    >
+                      The password must have at least 6 character.
+                    </span>
+                  </small>
                 </div>
-                <div class="input-group mb-4">
+
+                <!-- password confirmation  input -->
+
+                <div class="input-group mb-2 form-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="icon-lock"></i></span>
+                    <span class="input-group-text"
+                      ><i class="icon-lock"></i
+                    ></span>
                   </div>
-                  <input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" required>
+                  <input
+                    type="password"
+                    class="form-control"
+                    placeholder="Repeat password"
+                    formControlName="password2"
+                    style="min-width: 85%"
+                  />
+                  <small
+                    style="display: block"
+                    class="errormessage"
+                    *ngIf="
+                      !this.SignUpForm.get('password2').valid &&
+                      this.SignUpForm.get('password2').touched
+                    "
+                  >
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('password2').errors['required'] &&
+                        this.SignUpForm.get('password2').touched
+                      "
+                    >
+                      This feild is required .
+                    </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('password2').errors['NoMatch'] &&
+                        this.SignUpForm.get('password2').touched &&
+                        this.SignUpForm.controls.password2.value !== null
+                      "
+                    >
+                      The password does not match .
+                    </span>
+                  </small>
                 </div>
-                <button type="button" class="btn btn-block btn-success">Create Account</button>
+                <!-- Firstname -->
+                <div class="input-group mb-2 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Firstname "
+                    formControlName="firstname"
+                    style="min-width: 85%"
+                  />
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.SignUpForm.get('firstname').valid &&
+                      this.SignUpForm.get('firstname').touched
+                    "
+                  >
+                  <span
+                  *ngIf="
+                    this.SignUpForm.get('firstname').errors['required'] &&
+                    this.SignUpForm.get('firstname').touched
+                  "
+                >
+                  This feild is required .
+                </span>
+                <span
+                  *ngIf="
+                    this.SignUpForm.get('firstname').errors['pattern'] &&
+                    this.SignUpForm.get('firstname').touched
+                  "
+                >
+                  This Firstname format is incorrect . please use ony characters.
+                </span>
+                
+                  </small>
+                </div>
+                <!-- lastname input -->
+                <div class="input-group mb-2 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-user"></i
+                    ></span>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Lastname"
+                    formControlName="lastname"
+                    style="min-width: 85%"
+                  />
+                  <small
+                    class="errormessage"
+                    *ngIf="
+                      !this.SignUpForm.get('lastname').valid &&
+                      this.SignUpForm.get('lastname').touched
+                    "
+                  >
+                  <span
+                  *ngIf="
+                    this.SignUpForm.get('lastname').errors['required'] &&
+                    this.SignUpForm.get('lastname').touched
+                  "
+                >
+                  This feild is required .
+                </span>
+                <span
+                  *ngIf="
+                    this.SignUpForm.get('lastname').errors['pattern'] &&
+                    this.SignUpForm.get('lastname').touched
+                  "
+                >
+                  This Firstname format is incorrect . please use ony characters.
+                </span>
+                  </small>
+                </div>
+                <!-- country  input -->
+                <div class="input-group mb-2 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-map"></i>
+                    </span>
+                  </div>
+
+                  <select
+                    formControlName="country"
+                    class="form-control"
+                    name="country"
+                    id="country"
+                    autocomplete="off"
+                  >
+                    <option value="" disabled selected="selected">
+                      --Select Country--
+                    </option>
+                    <option
+                      *ngFor="let country of countries"
+                      [value]="country.name"
+                    >
+                      {{ country.name }}
+                    </option>
+                  </select>
+                </div>
+                <!-- Phone number  input -->
+                <div class="input-group mb-2 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-phone"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    placeholder="Phone"
+                    formControlName="phone"
+                  />
+                </div>
+                <small
+                  class="errormessage"
+                  *ngIf="
+                    !this.SignUpForm.get('phone').valid &&
+                    this.SignUpForm.get('phone').touched
+                  "
+                >
+                  Your phone Number is wrong .
+                </small>
+                <!-- age input -->
+                <div class="input-group mb-2 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"
+                      ><i class="icon-calendar"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="date"
+                    class="form-control"
+                    placeholder="Age"
+                    formControlName="age"
+                  />
+                </div>
+                <!-- image input -->
+                <div class="input-group mb-2 form-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="cui-file icons font d-block"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="file"
+                    class="form-control"
+                    (change)="onFileSelect($event)"
+                  />
+                </div>
+
+                <div *ngIf="imageData">
+                  <img [src]="imageData" alt="" width="100%" />
+                </div>
+
+                <button
+                  [disabled]="!status"
+                  type="submit"
+                  class="btn btn-block btn-success"
+                >
+                  Create Account
+                </button>
+                <small>
+                  Already has an account ?
+                  <a [routerLink]="['/login']"> click here </a>
+                </small>
               </form>
-            </div>
-            <div class="card-footer p-4">
-              <div class="row">
-                <div class="col-6">
-                  <button class="btn btn-block btn-facebook" type="button"><span>facebook</span></button>
-                </div>
-                <div class="col-6">
-                  <button class="btn btn-block btn-twitter" type="button"><span>twitter</span></button>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="row"></div>
     </div>
   </main>
 </div>

@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row justify-content-center" style="background-color: white;">
+        <h1>Fantasy</h1>
+    </div>
+    <hr>
+    <div style="margin-left: 43%;margin-top: 32%;"  *ngIf="isloading" class="lds-hourglass" ></div>
+    <div class="row" *ngIf="!isloading">
+        <ul style="display: inline-block;">
+            <div style="display: inline-block;" class="col-3 m-4" *ngFor="let book of categorie">
+                <li>
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" style="height: 200px;" [src]="book.bookCover" alt="BookCover">
+                        <div class="card-body">
+                          <h5 class="card-title">{{book.title}} </h5>
+                          <p class="card-text"> By : {{book.author}} </p>
+                          <a [routerLink]="['/library/Book/'+book._id]" routerLinkActive="router-link-active"  class="btn btn-primary">Check Book</a>
+                        </div>
+                      </div>
+                </li>
+            </div>
+        </ul>
+    </div>
+</div>

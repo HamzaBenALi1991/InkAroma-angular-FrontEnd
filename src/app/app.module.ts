@@ -12,6 +12,9 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { ForgetPasswordComponent } from './views/login/forget-password/forget-password.component';
+import { ResetComponent } from './views/login/reset/reset.component';
+
 
 import {
   AppAsideModule,
@@ -19,6 +22,7 @@ import {
   AppHeaderModule,
   AppFooterModule,
   AppSidebarModule,
+
 } from '@coreui/angular';
 
 // Import routing module
@@ -29,6 +33,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { YourInterceptor } from './services/token-intercepter.service';
+import { ProfileServiceService } from './services/profile-service.service';
+import { BookServiceService } from './services/book-service.service';
 
 @NgModule({
   imports: [
@@ -44,7 +54,10 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ChartsModule,
-    ToasterModule
+    ToasterModule,
+    ReactiveFormsModule,
+    HttpClientModule
+
   ],
   declarations: [
     AppComponent,
@@ -52,14 +65,21 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ForgetPasswordComponent,
+    ResetComponent
   ],
   providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: YourInterceptor,
+    multi: true
+  }, {
     provide: LocationStrategy,
-    useClass: HashLocationStrategy
+    useClass: HashLocationStrategy,
+
   },
-  ToasterService
-],
-  bootstrap: [ AppComponent ]
+    ToasterService,ProfileServiceService,BookServiceService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
