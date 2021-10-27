@@ -25,6 +25,7 @@ export class BookreviewComponent implements OnInit, OnDestroy {
   reviewedIndex:any
   reviewedScore :any
   reviwedId:any
+  button = false 
 
   constructor(private route: ActivatedRoute,
      private http: HttpService , 
@@ -76,6 +77,7 @@ export class BookreviewComponent implements OnInit, OnDestroy {
         
               // check if the user connected already reviewed this book 
               if (this.reviews[i].user.email ==this.user.email) {
+                this.button=true
                 this.reviewed=true   ;
                 this.reviewedIndex=i
                 this.reviewedScore= this.reviews[i].BookScore
@@ -116,6 +118,16 @@ export class BookreviewComponent implements OnInit, OnDestroy {
   }
 
   OnSubmit() {
+  if (this.button) {
+    this.http.updateReview(this.reviwedId,this.reviewform.value).subscribe(res=>{
+      this.toaster.pop('success','Review Updated' ,'Successfully !! ') ; 
+      location.reload()
+    },err=>{
+      console.log(err);
+      this.toaster.pop('error','Inernal Servor Problem' ,' Task has failed ') ;
+      this.toaster.pop('error','Inernal Servor Problem' , err.error) ; 
+    })
+  } else {
     this.http.createReview(this.reviewform.value).subscribe(res => {
       this.toaster.pop('success','Review submitted' ,'Successfully !! ') ; 
       location.reload()
@@ -124,6 +136,7 @@ export class BookreviewComponent implements OnInit, OnDestroy {
       this.toaster.pop('error','Inernal Servor Problem' ,' Task has failed ') ;
       this.toaster.pop('error','Inernal Servor Problem' , err.error) ; 
     })
+  }
 
   }
 
@@ -139,7 +152,7 @@ export class BookreviewComponent implements OnInit, OnDestroy {
 
   ondeleteRev(Id : any ){
     this.http.deleteReview(Id).subscribe(res=>{
-      this.toaster.pop('success','Review Deleted' ,'Successfully !! ') ; 
+      this.toaster.pop('success','Operation succeeded' ,'Successfully !! ') ; 
       location.reload()
     },err=>{
       console.log(err);
