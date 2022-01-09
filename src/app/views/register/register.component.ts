@@ -25,9 +25,9 @@ export class RegisterComponent implements OnInit {
   formdata = new FormData();
   imageData: string
   regexPhone = /^[0-9]{5,10}$/
+  regexPseudo=/^(?!\s)[a-zA-Z0-9_\s-]{2,20}$/
   regexEmail = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/
   regexname = /^[a-zA-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$/
-  regexPseudo=/^(?!\s)[a-zA-Z0-9_\s-]{2,20}$/
 
 
 
@@ -92,15 +92,16 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['login'])
       }, 3000);
 
-    }, err => {
-      if (err.error === "Email alreadt exist") {
-        this.toasterService.pop('error', 'Registeration  Failed  ', 'Email alreadt exist');
+    }, err => {      
+      if (err.error == "Email already exist") {
+        this.toasterService.pop('error', 'Registeration  Failed  ', 'Email already exist');
         let part = this.element.nativeElement.querySelector('.thisiswrong')
         this.path.addClass(part, 'show');
 
       } else {
         this.isloading = false
-        this.router.navigate(['500'])
+        console.log(err);
+        
       }
 
 

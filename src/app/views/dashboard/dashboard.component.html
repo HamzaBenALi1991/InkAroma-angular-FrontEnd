@@ -151,7 +151,7 @@
         class="comment mt-4 text-justify float-left"
       >
         <a
-          [routerLink]="['/userProfile/' + item.user._id]"
+          [routerLink]="['/userProfile/' + item.user?._id]"
           routerLinkActive="router-link-active"
         >
           <h4>By {{ item.user.pseudo }}</h4></a

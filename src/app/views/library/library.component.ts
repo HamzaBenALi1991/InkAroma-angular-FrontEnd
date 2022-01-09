@@ -52,9 +52,10 @@ export class LibraryComponent implements OnInit {
           this.others.push(this.books[i])
         } else {
           this.scfi.push(this.books[i])
-        } {
-          
-        }        
+        } 
+     
+        
+              
       }
     })
     setTimeout(() => {

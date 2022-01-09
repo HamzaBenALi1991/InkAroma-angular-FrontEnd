@@ -1,172 +1,24 @@
-[![@coreui angular](https://img.shields.io/badge/@coreui%20-angular-lightgrey.svg?style=flat-square)](https://github.com/coreui/angular)
-[![npm package][npm-coreui-angular-badge]][npm-coreui-angular] 
-[![NPM downloads][npm-coreui-angular-download]][npm-coreui-angular]  
-[![@coreui coreui_pro](https://img.shields.io/badge/@coreui%20-coreui-lightgrey.svg?style=flat-square)](https://github.com/coreui/coreui)
-[![npm package][npm-coreui-badge]][npm-coreui]
-[![NPM downloads][npm-coreui-download]][npm-coreui]    
-![angular](https://img.shields.io/badge/angular-^8.0.0-lightgrey.svg?style=flat-square)  
+# HowToSTart
 
-[npm-coreui-angular]: https://www.npmjs.com/package/@coreui/angular  
-[npm-coreui-angular-badge]: https://img.shields.io/npm/v/@coreui/angular.png?style=flat-square  
-[npm-coreui-angular-download]: https://img.shields.io/npm/dm/@coreui/angular.svg?style=flat-square  
-[npm-coreui]: https://www.npmjs.com/package/@coreui/coreui
-[npm-coreui-badge]: https://img.shields.io/npm/v/@coreui/coreui.png?style=flat-square
-[npm-coreui-download]: https://img.shields.io/npm/dm/@coreui/coreui.svg?style=flat-square
+1/ npm install
 
-# CoreUI Pro Angular 2+ Admin Template
+# for_this_to_work
 
-CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of redundant components, so the app is light enough to offer ultimate user experience. This means mobile devices also, where the navigation is just as easy and intuitive as on a desktop or laptop. The CoreUI Layout API lets you customize your project for almost any device – be it Mobile, Web or WebApp – CoreUI covers them all!
+2/ You are gonna have to download the backEnd side of the InkAroma .
+3/ you are gonna need to install mongoDB
 
-## Table of Contents
+# Tips
 
-* [Versions](#versions)
-* [CoreUI Pro](#coreui-pro)
-* [Admin Templates built on top of CoreUI Pro](#admin-templates-built-on-top-of-coreui-pro)
-* [Installation](#installation)
-* [Usage](#usage)
-* [What's included](#whats-included)
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-* [Versioning](#versioning)
-* [Creators](#creators)
-* [Community](#community)
-* [Community Projects](#community-projects)
-* [License](#license)
-* [Support CoreUI Development](#support-coreui-development)
+the intial data base is empty ,so it would be very usefull to add a couple books if you wanna experience
+the full potential of the platform and see how it works .
 
-## Versions
+# About the Project
 
-CoreUI is built on top of Bootstrap 4 and supports popular frameworks.
-
-* [CoreUI Pro Bootstrap Admin Template](https://github.com/coreui/coreui-pro-bootstrap-admin-template)
-* [CoreUI Pro Bootstrap Admin Template (Ajax)](https://github.com/coreui/coreui-pro-bootstrap-admin-template-ajax)
-* [CoreUI Pro Angular 2+ Admin Template](https://github.com/coreui/coreui-pro-angular-admin-template)
-* 🚧 CoreUI Pro .NET Core 2 Admin Template (Available Soon)
-* [CoreUI Pro React.js Admin Template](https://github.com/coreui/coreui-pro-react-admin-template)
-* [CoreUI Pro Vue.js Admin Template](https://github.com/coreui/coreui-pro-vue-admin-template)
-
-**Only customers with [Membership Plan](https://coreui.io/pro/#buy) have access to private github repositories.**
-
-## CoreUI Pro
-
-* 💪  [CoreUI Pro Bootstrap Admin Template](https://coreui.io/pro/)
-* 💪  [CoreUI Pro Bootstrap Admin Template (Ajax)](https://coreui.io/pro/)
-* 💪  [CoreUI Pro Angular Admin Template](https://coreui.io/pro/angular)
-* 💪  [CoreUI Pro React Admin Template](https://coreui.io/pro/react)
-* 💪  [CoreUI Pro Vue Admin Template](https://coreui.io/pro/vue)
-
-## Admin Templates built on top of CoreUI Pro
-
-| CoreUI Pro | Prime | Root | Alba | Leaf |
-| --- | --- | --- | --- | --- |
-| [![CoreUI Pro Admin Template](https://coreui.io/assets/img/example-coureui.jpg)](https://coreui.io/pro/angular/)| [![Prime Admin Template](https://coreui.io/assets/img/responsive-prime.png)](https://coreui.io/admin-templates/angular/prime/?support=1)| [![Root Admin Template](https://coreui.io/assets/img/responsive-root.png)](https://coreui.io/admin-templates/angular/root/?support=1)| [![Alba Admin Template](https://coreui.io/assets/img/responsive-alba.png)](https://coreui.io/admin-templates/angular/alba/?support=1)| [![Leaf Admin Template](https://coreui.io/assets/img/responsive-leaf.png)](https://coreui.io/admin-templates/angular/leaf/?support=1)
-
-#### Prerequisites
-Before you begin, make sure your development environment includes `Node.js®` and an `npm` package manager.
-
-###### Node.js
-Angular 7 requires `Node.js` version 8.x or 10.x.
-
-- To check your version, run `node -v` in a terminal/console window.
-- To get `Node.js`, go to [nodejs.org](https://nodejs.org/).
-
-###### Angular CLI
-Install the Angular CLI globally using a terminal/console window.
-```bash
-npm install -g @angular/cli
-```
-
-##### Update to Angular 8
-Angular 8 requires `Node.js` version 12.x   
-Update guide - see: [https://update.angular.io](https://update.angular.io)
-
-## Installation
-
-### Clone repo
-
-**Only customers with [Membership Plan](https://coreui.io/pro/#buy) have access to private github repository.**
-
-``` bash
-# clone the repo
-$ git clone https://github.com/coreui/coreui-pro-angular-admin-template.git my-project
-
-# go into app's directory
-$ cd my-project
-
-# install app's dependencies
-$ npm install
-```
-
-### Copy and Paste
-
-Copy all your files to your project folder and then,
-
-``` bash
-# go into app's directory
-$ cd my-project
-
-# install app's dependencies
-$ npm install
-```
-
-## Usage
-
-``` bash
-# serve with hot reload at localhost:4200.
-$ ng serve
-
-# build for production with minification
-$ ng build
-```
-
-## What's included
-
-Within the download you'll find the following directories and files, logically grouping common assets and providing both compiled and minified variations. You'll see something like this:
-
-```
-coreui-pro-angular-admin-template/
-├── e2e/
-├── src/
-│   ├── app/
-│   ├── assets/
-│   ├── environments/
-│   ├── scss/
-│   ├── index.html
-│   └── ...
-├── .angular.json
-├── ...
-├── package.json
-└── ...
-```
-
-## Documentation
-
-The documentation for the CoreUI Pro Angular Admin Template is hosted at our website [CoreUI](https://coreui.io/angular/)
-
-## Versioning
-
-For transparency into our release cycle and in striving to maintain backward compatibility,CoreUI Pro Admin Template is maintained under [the Semantic Versioning guidelines](http://semver.org/).
-
-See [the Releases section of our project](https://github.com/coreui/coreui-pro-angular-admin-template/releases) for changelogs for each release version.
-
-## Creators
-
-**Łukasz Holeczek**
-
-* <https://twitter.com/lukaszholeczek>
-* <https://github.com/mrholek>
-
-**Andrzej Kopański**
-
-* <https://github.com/xidedix>
-
-## Community
-
-Get updates on CoreUI's development and chat with the project maintainers and community members.
-
-- Follow [@core_ui on Twitter](https://twitter.com/core_ui).
-- Read and subscribe to [CoreUI Blog](https://coreui.ui/blog/).
-
-## Copyright and license
-
-copyright 2019 creativeLabs Łukasz Holeczek.
+This is A friendly users platform , an open source library of books that any user may:
+1/ Create his own profile and authenticate (login ) to the platform .
+2/ Crud the profile.
+3/ Check all the library of books either as a whole or by categories.
+4/ Access a specifique book , read it's infos , check the score and reviews added by other users.
+5/ add a book
+6/ add a score , review and update those two options to a specifique book
+7/ access to other user profile and infos made available by them for other users to see
