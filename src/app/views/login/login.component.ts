@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     private http: HttpService,
     private authService: AuthServiceService,
     private router: Router) { }
-  Id : any 
+  Id: any
   users: any
   token: any
   loginForm: FormGroup
@@ -59,12 +59,12 @@ export class LoginComponent implements OnInit {
     // http request infos
     this.http.login(this.loginForm.value).subscribe(res => {
       this.token = res
-      this.Id=res
-      this.Id=this.Id._Id
+      this.Id = res
+      this.Id = this.Id._Id
       this.token = this.token.token
-      this.authService.logIn(this.token , this.Id) ,
-      //notifications 
-      this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
+      this.authService.logIn(this.token, this.Id),
+        //notifications 
+        this.toasterService.pop("success", "Ink-Aroma", "Login succeded")
       this.isloading = false
       this.router.navigate(["dashboard"])
     }, err => {
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
         // spinner stopped 
         this.isloading = false
         this.toasterService.pop("warning", "login failed", "Internal Serveur Problem .");
-        console.log(err.error);
+        console.log(err.error.message);
 
       }
 

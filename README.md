@@ -4,11 +4,13 @@
 
 # for_this_to_work
 
-2/ You are gonna have to download the backEnd side of the InkAroma .
-3/ you are gonna need to install mongoDB
+1/ You are gonna have to download the backEnd side of the InkAroma .
+2/ you are gonna need to install mongoDB
 
 # Tips
 
+1/ if you want to check the SuperAdmin dashboard , change the email in the html default layout (col 11) and in the admin guard
+2/
 the intial data base is empty ,so it would be very usefull to add a couple books if you wanna experience
 the full potential of the platform and see how it works .
 
