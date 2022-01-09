@@ -222,11 +222,20 @@
               ></textarea>
             </div>
             <button
+            *ngIf="!button"
               [disabled]="!status || !formStatus"
               type="submit"
               class="btn btn-primary m-2"
             >
               Submit Review
+            </button>
+            <button
+            *ngIf="button"
+              [disabled]="!status || !formStatus"
+              type="submit"
+              class="btn btn-primary m-2"
+            >
+              Update Review
             </button>
             <button
               type="button"

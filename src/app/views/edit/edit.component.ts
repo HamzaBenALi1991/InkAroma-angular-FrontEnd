@@ -159,7 +159,7 @@ export class EditComponent implements OnInit {
     let person = prompt("Are you Sure you want to delete your account ?", "If Yes ,Write your Email ");
     if (person == this.user.email) {      
       this.http.deleteUser(this.user._id).subscribe(res=>{
-        this.toaster.pop('warning' , "GoodBye"+ this.user.pseudo , "your account has been Deleted .");
+        this.toaster.pop('warning' , " GoodBye "+ this.user.pseudo , " your account has been Deleted .");
         this.router.navigate(['/login']) ; 
         localStorage.clear()
         

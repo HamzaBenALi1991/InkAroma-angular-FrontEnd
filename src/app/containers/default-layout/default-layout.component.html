@@ -1,21 +1,36 @@
 <!-- <div *ngIf="isloading" class="lds-hourglass"></div> -->
 <app-header
-*ngIf="!isloading"
+  *ngIf="!isloading"
   [navbarBrandRouterLink]="['/dashboard']"
   [fixed]="true"
-  [navbarBrandFull]="{src: 'https://see.fontimg.com/api/renderfont4/dJnR/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SW5rLUFyb21h/merry-christmas-star.png', width: 89, height: 25}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{
+    src: 'https://see.fontimg.com/api/renderfont4/dJnR/eyJyIjoiZnMiLCJoIjo2NSwidyI6MTAwMCwiZnMiOjY1LCJmZ2MiOiIjMDAwMDAwIiwiYmdjIjoiI0ZGRkZGRiIsInQiOjF9/SW5rLUFyb21h/merry-christmas-star.png',
+    width: 89,
+    height: 25
+  }"
+  [navbarBrandMinimized]="{
+    src: 'assets/img/brand/sygnet.svg',
+    width: 30,
+    height: 30,
+    alt: 'CoreUI Logo'
+  }"
   [sidebarToggler]="'lg'"
-  [asideMenuToggler]="'lg'">
+  [asideMenuToggler]="'lg'"
+>
   <ul class="nav navbar-nav d-md-down-none">
-    <li *ngIf="user.email=='testforhamza@gmail.com'"  class="nav-item px-3">
-      <a class="nav-link" [routerLink]="['/library']" >Dashboard</a>
+    <li *ngIf="user.email == 'testforhamza@gmail.com'" class="nav-item px-3">
+      <a class="nav-link" [routerLink]="['/dashboard']">Dashboard</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" [routerLink]="['/library']" >Library</a>
+      <a class="nav-link" [routerLink]="['/library']">Library</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</a>
+      <a
+        class="nav-link"
+        [routerLink]="['/profile']"
+        routerLinkActive="router-link-active"
+        >Profile</a
+      >
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
@@ -184,26 +199,71 @@
       <a class="nav-link" href="#"><i class="icon-location-pin"></i></a>
     </li> -->
     <li class="nav-item dropdown" dropdown placement="bottom right">
-      <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-        <img [src]="user.image" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+      <a
+        class="nav-link"
+        data-toggle="dropdown"
+        href="#"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false"
+        dropdownToggle
+        (click)="(false)"
+      >
+        <img
+          [src]="user.image"
+          class="img-avatar"
+          alt="admin@bootstrapmaster.com"
+        />
       </a>
-      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+      <div
+        class="dropdown-menu dropdown-menu-right"
+        *dropdownMenu
+        aria-labelledby="simple-dropdown"
+      >
         <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" [routerLink]="['/profile']" routerLinkActive="router-link-active" ><i class="fa fa-user"></i> Profile page <span class="badge badge-info"></span></a>
-        <a class="dropdown-item" [routerLink]="['/library']" routerLinkActive="router-link-active" ><i class="fa fa-home"></i> Home page <span class="badge badge-success"></span></a>
+        <a
+          class="dropdown-item"
+          [routerLink]="['/profile']"
+          routerLinkActive="router-link-active"
+          ><i class="fa fa-user"></i> Profile page
+          <span class="badge badge-info"></span
+        ></a>
+        <a
+          class="dropdown-item"
+          [routerLink]="['/library']"
+          routerLinkActive="router-link-active"
+          ><i class="fa fa-home"></i> Home page
+          <span class="badge badge-success"></span
+        ></a>
         <!-- <a class="dropdown-item" href="#"><i class="fa fa-tasks"></i> Tasks<span class="badge badge-danger">42</span></a>
         <a class="dropdown-item" href="#"><i class="fa fa-comments"></i> Comment<span class="badge badge-warning">42</span></a> -->
         <div class="dropdown-header text-center"><strong>Settings</strong></div>
-        <a class="dropdown-item" [routerLink]="['/edit']" routerLinkActive="router-link-active" ><i class="fa fa-user-circle-o"></i> Edit Profile </a>
-        <a class="dropdown-item" [routerLink]="['/edit']" routerLinkActive="router-link-active"  ><i class="fa fa-wrench"></i> Delete Profile </a>
-        <a class="dropdown-item" (click)='logout()'><i class="fa fa-lock"></i> Logout</a>
+        <a
+          class="dropdown-item"
+          [routerLink]="['/edit']"
+          routerLinkActive="router-link-active"
+          ><i class="fa fa-user-circle-o"></i> Edit Profile
+        </a>
+        <a
+          class="dropdown-item"
+          [routerLink]="['/edit']"
+          routerLinkActive="router-link-active"
+          ><i class="fa fa-wrench"></i> Delete Profile
+        </a>
+        <a class="dropdown-item" (click)="logout()"
+          ><i class="fa fa-lock"></i> Logout</a
+        >
       </div>
     </li>
   </ul>
 </app-header>
 <div class="app-body">
   <app-sidebar [fixed]="true" [display]="'lg'">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="sidebarMinimized"></app-sidebar-nav>
+    <app-sidebar-nav
+      [navItems]="navItems"
+      [perfectScrollbar]
+      [disabled]="sidebarMinimized"
+    ></app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
   <!-- Main content -->
@@ -213,26 +273,29 @@
     <cui-breadcrumb>
       <!-- Breadcrumb Menu-->
       <li class="breadcrumb-menu d-md-down-none">
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-     
-        </div>
+        <div
+          class="btn-group"
+          role="group"
+          aria-label="Button group with nested dropdown"
+        ></div>
       </li>
     </cui-breadcrumb>
     <!-- deprecation warning for 'app-breadcrumb' -->
     <!--<ol class="breadcrumb">-->
-      <!--<app-breadcrumb></app-breadcrumb>-->
-      <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
-      <!--<li class="breadcrumb-menu d-md-down-none">-->
-        <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
-          <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
-          <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
-          <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
-        <!--</div>-->
-      <!--</li>-->
+    <!--<app-breadcrumb></app-breadcrumb>-->
+    <!--&lt;!&ndash; Breadcrumb Menu&ndash;&gt;-->
+    <!--<li class="breadcrumb-menu d-md-down-none">-->
+    <!--<div class="btn-group" role="group" aria-label="Button group with nested dropdown">-->
+    <!--<a class="btn" href="#"><i class="icon-speech"></i></a>-->
+    <!--<a class="btn" [routerLink]="['/dashboard']"><i class="icon-graph"></i> &nbsp;Dashboard</a>-->
+    <!--<a class="btn" href="#"><i class="icon-settings"></i> &nbsp;Settings</a>-->
+    <!--</div>-->
+    <!--</li>-->
     <!--</ol>-->
     <div class="container-fluid">
       <router-outlet></router-outlet>
-    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.container-fluid -->
   </main>
   <!-- <app-aside [fixed]="true" [display]="false">
     <tabset>
@@ -487,5 +550,5 @@
   </app-aside> -->
 </div>
 <app-footer>
-  <span><a href="https://www.facebook.com/FivePoints5P/">Five-Points</a> &copy; 2021 creativeLabs.</span>
+  <span><a href="#">HamzaDeb</a> &copy; 2021 creativeLabs.</span>
 </app-footer>

@@ -23,7 +23,7 @@ export class FantasyComponent implements OnInit {
 
     }, () => {
       for (let i = 0; i < this.books.length; i++) {
-          if (this.books[i].categorie==='Detective') {
+          if (this.books[i].categorie==='Fantasy') {
             this.categorie.push(this.books[i])
           }        
       }

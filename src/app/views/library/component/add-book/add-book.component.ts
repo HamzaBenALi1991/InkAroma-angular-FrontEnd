@@ -19,7 +19,7 @@ export class AddBookComponent implements OnInit {
   imageData: string
   regexSimple = /^.{50,1000}.*?\b/
   status: any
-  isloading =true 
+  isloading = true
 
   ngOnInit(): void {
     this.user = localStorage.getItem('user');
@@ -31,7 +31,7 @@ export class AddBookComponent implements OnInit {
       "bookCover": new FormControl(null),
       "description": new FormControl(null, [Validators.required, Validators.pattern(this.regexSimple)]),
       "user": new FormControl(this.user._id),
-      "categorie": new FormControl(null,Validators.required)
+      "categorie": new FormControl(null, Validators.required)
     })
 
     // for ASYNCvalidati 
@@ -40,7 +40,7 @@ export class AddBookComponent implements OnInit {
         this.status = this.bookForm.status === 'VALID' ? true : false // this is for updating disablied button 
       }
     );
-    this.isloading=false 
+    this.isloading = false
   }
 
 
@@ -61,22 +61,24 @@ export class AddBookComponent implements OnInit {
   }
 
   OnSubmitBook() {
-    this.isloading=true 
+    this.isloading = true
     this.http.createBook(this.bookForm.value, this.bookForm.value.bookCover).subscribe(res => {
-      let id:any =res 
-        this.toaster.pop("success" ,'Operaton succeeded ! ',"Book has been Added ." ); 
-        this.isloading=false 
-        this.router.navigate(["library/Book/"+id._id])
+      let id: any = res
+      this.toaster.pop("success", 'Operaton succeeded ! ', "Book has been Added .");
+      this.isloading = false
+      this.router.navigate(["library/Book/" + id._id])
 
     }, err => {
       if (err.error == 'This Book  already exist') {
         this.toaster.pop('error', "Operation Failed", "This book Already exist .")
-        this.isloading = false 
+        this.isloading = false
       } else {
-        this.toaster.pop('error', "Operation Failed", "Try and Change the Image Format or the size of the Image." )
-        this.toaster.pop('error', "Operation Failed", err.error)
-        location.reload()
-        this.isloading = false 
+        this.toaster.pop('error', "Operation Failed", "Try and Change the Image Format or the size of the Image.")
+        this.toaster.pop('error', "Operation Failed", "Please make sure the image FORMAT IS CORRECT")
+        this.isloading = false
+        setTimeout(() => {
+          location.reload()
+        }, 3000);
 
 
       }

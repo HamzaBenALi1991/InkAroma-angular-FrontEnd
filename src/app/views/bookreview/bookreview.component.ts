@@ -22,13 +22,14 @@ export class BookreviewComponent implements OnInit, OnDestroy {
   reviews: any[] = []
   totalscore = 0;
   reviewed = false
-  reviewedIndex:any
-  reviewedScore :any
-  reviwedId:any
+  reviewedIndex: any
+  reviewedScore: any
+  reviwedId: any
+  button = false
 
   constructor(private route: ActivatedRoute,
-     private http: HttpService , 
-     private toaster :ToasterService) { }
+    private http: HttpService,
+    private toaster: ToasterService) { }
 
   ngOnInit(): void {
     this.isloading = true
@@ -63,8 +64,14 @@ export class BookreviewComponent implements OnInit, OnDestroy {
           console.log(err);
 
         }, () => {
-          // setting right path to image src
-          if (this.book.bookCover != "http://localhost:3000/uploads/books/generic.jpg") {
+          this.http.getOneUser(this.user._id).subscribe(res => {
+            this.user = res
+          },err=>{
+            console.log(err);
+            
+          })
+            // setting right path to image src
+            if(this.book.bookCover != "http://localhost:3000/uploads/books/generic.jpg") {
             this.book.bookCover = "http://localhost:3000/uploads/books/" + this.book.bookCover
           }
           // stop spinning 
@@ -73,24 +80,25 @@ export class BookreviewComponent implements OnInit, OnDestroy {
             let idrev = this.book.reviews[i]._id
             this.http.getOneReview(idrev).subscribe(res => {
               this.reviews.push(res)
-        
+
               // check if the user connected already reviewed this book 
-              if (this.reviews[i].user.email ==this.user.email) {
-                this.reviewed=true   ;
-                this.reviewedIndex=i
-                this.reviewedScore= this.reviews[i].BookScore
-                this.reviwedId=this.reviews[i]._id
+              if (this.reviews[i].user.email == this.user.email) {
+                this.button = true
+                this.reviewed = true;
+                this.reviewedIndex = i
+                this.reviewedScore = this.reviews[i].BookScore
+                this.reviwedId = this.reviews[i]._id
                 this.reviewform.setValue({
                   'user': this.user._id,
-                  'book':this.bookId,
-                  'review' : this.reviews[i].review , 
+                  'book': this.bookId,
+                  'review': this.reviews[i].review,
                   'BookScore': this.reviews[i].BookScore
                 })
               }
 
             }, err => {
               console.log(err);
-            },()=>{
+            }, () => {
               if (this.reviews[i].user.image != "http://localhost:3000/uploads/users/download.jpeg") {
                 this.reviews[i].user.image = "http://localhost:3000/uploads/users/" + this.reviews[i].user.image
               }
@@ -107,7 +115,7 @@ export class BookreviewComponent implements OnInit, OnDestroy {
             this.book.BookScore = this.book.BookScore + '/ 5'
           }
           setTimeout(() => {
-            this.isloading = false;            
+            this.isloading = false;
           }, 1000);
         })
 
@@ -116,14 +124,25 @@ export class BookreviewComponent implements OnInit, OnDestroy {
   }
 
   OnSubmit() {
-    this.http.createReview(this.reviewform.value).subscribe(res => {
-      this.toaster.pop('success','Review submitted' ,'Successfully !! ') ; 
-      location.reload()
-    }, err => {
-      console.log(err);
-      this.toaster.pop('error','Inernal Servor Problem' ,' Task has failed ') ;
-      this.toaster.pop('error','Inernal Servor Problem' , err.error) ; 
-    })
+    if (this.button) {
+      this.http.updateReview(this.reviwedId, this.reviewform.value).subscribe(res => {
+        this.toaster.pop('success', 'Review Updated', 'Successfully !! ');
+        location.reload()
+      }, err => {
+        console.log(err);
+        this.toaster.pop('error', 'Inernal Servor Problem', ' Task has failed ');
+        this.toaster.pop('error', 'Inernal Servor Problem', err.error);
+      })
+    } else {
+      this.http.createReview(this.reviewform.value).subscribe(res => {
+        this.toaster.pop('success', 'Review submitted', 'Successfully !! ');
+        location.reload()
+      }, err => {
+        console.log(err);
+        this.toaster.pop('error', 'Inernal Servor Problem', ' Task has failed ');
+        this.toaster.pop('error', 'Inernal Servor Problem', err.error);
+      })
+    }
 
   }
 
@@ -137,19 +156,19 @@ export class BookreviewComponent implements OnInit, OnDestroy {
     this.formStatus = true
   }
 
-  ondeleteRev(Id : any ){
-    this.http.deleteReview(Id).subscribe(res=>{
-      this.toaster.pop('success','Review Deleted' ,'Successfully !! ') ; 
+  ondeleteRev(Id: any) {
+    this.http.deleteReview(Id).subscribe(res => {
+      this.toaster.pop('success', 'Operation succeeded', 'Successfully !! ');
       location.reload()
-    },err=>{
+    }, err => {
       console.log(err);
-      this.toaster.pop('error','Inernal Servor Problem' ,' Task has failed ') ;
-      this.toaster.pop('error','Inernal Servor Problem' , err.error) ; 
+      this.toaster.pop('error', 'Inernal Servor Problem', ' Task has failed ');
+      this.toaster.pop('error', 'Inernal Servor Problem', err.error);
 
 
 
-    
-      
+
+
     })
   }
 }
