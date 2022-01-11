@@ -23,3 +23,10 @@ This is A friendly users platform , an open source library of books that any use
 5/ add a book<br>
 6/ add a score , review and update those two options to a specifique book<br><br>
 7/ access to other user profile and infos made available by them for other users to see<br>
+
+### ScreenShots :
+
+|                 _Home_                 |               _login_               |                     _Registration_                     |                _Profile 1_                |              _Profile 2_               |                     _Edit Profile_                      |                 _Reviews_        |          _Reviews2_
+| :-------------------------------------------: | :----------------------------------: | :------------------------------------------------: | :-----------------------------------------: | :-----------------------------------------: | :-----------------------------------------------: | :-----------------------------------------: | :-----------------------------------------------: |
+| ![HOME](./src/assets/img/homePage.png) | ![login](./src/assets/img/login.png) | ![Registration](./src/assets/img/registration.png) | ![Profile 1](./src/assets/img/Profile1.png) | ![Profile 2](./src/assets/img/profile2.png) | ![Edit Profile](./src/assets/img/profileEdit1.png) | ![Edit Profile](./src/assets/img/review1.png) | ![Edit Profile](./src/assets/img/review2.png) |
+
