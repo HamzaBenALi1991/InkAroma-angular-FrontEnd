@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'angular2-toaster';
 import { HttpService } from '../../services/http.service';
 import { countries } from '../../shared/component/store/country-data';
+import { regexEmail, regexName, regexPhone, regexPseudo } from '../../shared/component/store/regex-data';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,17 +18,23 @@ export class RegisterComponent implements OnInit {
     private path: Renderer2,
     private router: Router) { }
   public countries: any = countries
+  public regexPhone = regexPhone
+  public regexPseudo = regexPseudo
+  public regexEmail = regexEmail
+  public regexName = regexName
+
+
   SignUpForm: FormGroup;
-  pass: "";
+  changedPassword: any;
   status = false;
   imageuploaded: any
   isloading = false
   formdata = new FormData();
   imageData: string
-  regexPhone = /^[0-9]{5,10}$/
-  regexPseudo=/^(?!\s)[a-zA-Z0-9_\s-]{2,20}$/
-  regexEmail = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/
-  regexname = /^[a-zA-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$/
+  // regexPhone = /^[0-9]{5,10}$/
+  // regexPseudo = /^(?!\s)[a-zA-Z0-9_\s-]{2,20}$/
+  // regexEmail = /([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?(\.[0-9A-Za-z]([0-9A-Za-z-]{0,61}[0-9A-Za-z])?)+/
+  // regexName = /^[a-zA-Z][a-z]*(([,.] |[ '-])[A-Za-z][a-z]*)*(\.?)$/
 
 
 
@@ -36,12 +43,12 @@ export class RegisterComponent implements OnInit {
 
     // reactive form set up 
     this.SignUpForm = new FormGroup({
-      "pseudo": new FormControl(null,[ Validators.required,Validators.pattern(this.regexPseudo)]),
+      "pseudo": new FormControl(null, [Validators.required, Validators.pattern(this.regexPseudo)]),
       "email": new FormControl(null, [Validators.required, Validators.pattern(this.regexEmail)]),
       "password": new FormControl(null, [Validators.required, Validators.minLength(6)]),
       "password2": new FormControl(null, [Validators.required, this.confirmPassword.bind(this)]),
-      "firstname": new FormControl(null, [Validators.required, Validators.pattern(this.regexname)]),
-      "lastname": new FormControl(null, [Validators.required, Validators.pattern(this.regexname)]),
+      "firstname": new FormControl(null, [Validators.required, Validators.pattern(this.regexName)]),
+      "lastname": new FormControl(null, [Validators.required, Validators.pattern(this.regexName)]),
       "age": new FormControl(null),
       "country": new FormControl(null),
       "phone": new FormControl(null, Validators.pattern(this.regexPhone)),
@@ -51,7 +58,7 @@ export class RegisterComponent implements OnInit {
     // for ASYNCvalidation password 
     this.SignUpForm.valueChanges.subscribe( // this is for updating password input to compare it to password 2 on the confirmpassword validator 
       (value: any) => {
-        this.pass = value.password;
+        this.changedPassword = value.password;
         this.status = this.SignUpForm.status === 'VALID' ? true : false // this is for updating disablied button 
       }
     );
@@ -74,7 +81,7 @@ export class RegisterComponent implements OnInit {
   }
   // this is a personalised validators for checking the confirmation password 
   confirmPassword(control: FormControl | any): { [s: string]: Boolean } | null {
-    if (this.pass !== control.value) {
+    if (this.changedPassword !== control.value) {
       return { 'NoMatch': true };
     } return null
   }
@@ -90,9 +97,9 @@ export class RegisterComponent implements OnInit {
       setTimeout(() => {
         this.isloading = false
         this.router.navigate(['login'])
-      }, 3000);
+      }, 2000);
 
-    }, err => {      
+    }, err => {
       if (err.error == "Email already exist") {
         this.toasterService.pop('error', 'Registeration  Failed  ', 'Email already exist');
         let part = this.element.nativeElement.querySelector('.thisiswrong')
@@ -101,7 +108,7 @@ export class RegisterComponent implements OnInit {
       } else {
         this.isloading = false
         console.log(err);
-        
+
       }
 
 

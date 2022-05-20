@@ -47,22 +47,24 @@
                       !this.SignUpForm.get('pseudo').valid &&
                       this.SignUpForm.get('pseudo').touched
                     "
-                  > <span
-                  *ngIf="
-                    this.SignUpForm.get('pseudo').errors['required'] &&
-                    this.SignUpForm.get('pseudo').touched
-                  "
-                >
-                  This feild is required .
-                </span>
-                <span
-                  *ngIf="
-                    this.SignUpForm.get('pseudo').errors['pattern'] &&
-                    this.SignUpForm.get('pseudo').touched
-                  "
-                >
-                  Pseudo with spaces at first are not Allowed . and should have 2 to 20 characters
-                </span>
+                  >
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('pseudo').errors['required'] &&
+                        this.SignUpForm.get('pseudo').touched
+                      "
+                    >
+                      This feild is required .
+                    </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('pseudo').errors['pattern'] &&
+                        this.SignUpForm.get('pseudo').touched
+                      "
+                    >
+                      Pseudo with spaces at first are not Allowed . and should
+                      have 2 to 20 characters
+                    </span>
                   </small>
                 </div>
 
@@ -212,23 +214,23 @@
                       this.SignUpForm.get('firstname').touched
                     "
                   >
-                  <span
-                  *ngIf="
-                    this.SignUpForm.get('firstname').errors['required'] &&
-                    this.SignUpForm.get('firstname').touched
-                  "
-                >
-                  This feild is required .
-                </span>
-                <span
-                  *ngIf="
-                    this.SignUpForm.get('firstname').errors['pattern'] &&
-                    this.SignUpForm.get('firstname').touched
-                  "
-                >
-                  This Firstname format is incorrect . please use ony characters.
-                </span>
-                
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('firstname').errors['required'] &&
+                        this.SignUpForm.get('firstname').touched
+                      "
+                    >
+                      This feild is required .
+                    </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('firstname').errors['pattern'] &&
+                        this.SignUpForm.get('firstname').touched
+                      "
+                    >
+                      This Firstname format is incorrect . please use ony
+                      characters.
+                    </span>
                   </small>
                 </div>
                 <!-- lastname input -->
@@ -252,22 +254,23 @@
                       this.SignUpForm.get('lastname').touched
                     "
                   >
-                  <span
-                  *ngIf="
-                    this.SignUpForm.get('lastname').errors['required'] &&
-                    this.SignUpForm.get('lastname').touched
-                  "
-                >
-                  This feild is required .
-                </span>
-                <span
-                  *ngIf="
-                    this.SignUpForm.get('lastname').errors['pattern'] &&
-                    this.SignUpForm.get('lastname').touched
-                  "
-                >
-                  This Firstname format is incorrect . please use ony characters.
-                </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('lastname').errors['required'] &&
+                        this.SignUpForm.get('lastname').touched
+                      "
+                    >
+                      This feild is required .
+                    </span>
+                    <span
+                      *ngIf="
+                        this.SignUpForm.get('lastname').errors['pattern'] &&
+                        this.SignUpForm.get('lastname').touched
+                      "
+                    >
+                      This Firstname format is incorrect . please use ony
+                      characters.
+                    </span>
                   </small>
                 </div>
                 <!-- country  input -->
